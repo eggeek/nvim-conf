@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 function M.define_autocmds(definitions)
   for _, entry in ipairs(definitions) do

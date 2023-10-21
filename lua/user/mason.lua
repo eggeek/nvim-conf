@@ -24,7 +24,8 @@ M.servers = {
   "yamlls",
   "ruff_lsp",
   "texlab",
-  "clangd"
+  "clangd",
+  "jdtls"
   -- "marksman",
   -- "tailwindcss",
 }

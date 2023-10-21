@@ -3,7 +3,6 @@
 "----------------------------------------------------------------------
 inoremap <c-p> <up>
 inoremap <c-n> <down>
-inoremap <c-s> <ESC>:w<CR>
 inoremap <c-k> <c-o>d$
 inoremap <C-A> <C-O>^
 inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
