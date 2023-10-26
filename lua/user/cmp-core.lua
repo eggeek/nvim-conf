@@ -126,8 +126,10 @@ M.config = function()
   local ConfirmBehavior = cmp_types.ConfirmBehavior
   local SelectBehavior = cmp_types.SelectBehavior
 
-  local cmp = require("user.utils").require_on_index "cmp"
-  local luasnip = require("user.utils").require_on_index "luasnip"
+  -- local cmp = require("user.utils").require_on_index "cmp"
+  -- local luasnip = require("user.utils").require_on_index "luasnip"
+  local cmp = require "cmp"
+  local luasnip = require("luasnip")
   local cmp_window = require "cmp.config.window"
   local cmp_mapping = require "cmp.config.mapping"
   local icons = require "user.icons"
@@ -151,11 +153,11 @@ M.config = function()
       keyword_length = 2,
     },
     experimental = {
-      ghost_text = false,
-      native_menu = false,
+      ghost_text = { hl_group = "CmpGhostText" },
+      native = false,
     },
     formatting = {
-      fields = { "kind", "abbr", "menu" },
+      fields = { "abbr", "kind", "menu" },
       max_width = 0,
       kind_icons = icons.kind,
       source_names = {
@@ -183,32 +185,9 @@ M.config = function()
         if max_width ~= 0 and #vim_item.abbr > max_width then
           vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
         end
-        vim_item.kind = icons.kind[vim_item.kind]
-
-        if entry.source.name == "copilot" then
-          vim_item.kind = icons.git.Octoface
-          vim_item.kind_hl_group = "CmpItemKindCopilot"
-        end
-
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
-
-        if entry.source.name == "crates" then
-          vim_item.kind = icons.misc.Package
-          vim_item.kind_hl_group = "CmpItemKindCrate"
-        end
-
-        if entry.source.name == "lab.quick_data" then
-          vim_item.kind = icons.misc.CircuitBoard
-          vim_item.kind_hl_group = "CmpItemKindConstant"
-        end
-
-        if entry.source.name == "emoji" then
-          vim_item.kind = icons.misc.Smiley
-          vim_item.kind_hl_group = "CmpItemKindEmoji"
-        end
+        local icon = icons.kind[vim_item.kind] or vim_item.kind
+        icon = (" " .. icon .. " ") or icon
+        vim_item.kind = string.format("%s %s", icon, vim_item.kind or "")
         vim_item.menu = M.cmp.formatting.source_names[entry.source.name]
         vim_item.dup = M.cmp.formatting.duplicates[entry.source.name]
             or M.cmp.formatting.duplicates_default
@@ -235,7 +214,6 @@ M.config = function()
           return true
         end,
       },
-
       { name = "path" },
       { name = "luasnip" },
       { name = "nvim_lua" },
@@ -245,23 +223,27 @@ M.config = function()
       -- { name = "tmux" },
     },
     mapping = {
-      ["<C-k>"] = cmp_mapping(cmp_mapping.select_prev_item(), { "i", "c" }),
-      ["<C-j>"] = cmp_mapping(cmp_mapping.select_next_item(), { "i", "c" }),
+      ["<C-k>"] = cmp_mapping.select_prev_item({behavior = SelectBehavior.Select}, { "i", "c" }),
+      ["<C-j>"] = cmp_mapping.select_next_item({behavior = SelectBehavior.Select}, { "i", "c" }),
       ["<M-k>"] = cmp_mapping.scroll_docs(-4),
       ["<M-j>"] = cmp_mapping.scroll_docs(4),
-      ["<C-y>"] = cmp_mapping {
-        i = cmp_mapping.confirm { behavior = ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
-          end
-        end,
-      },
+      -- ["<C-y>"] = cmp_mapping {
+      --   i = cmp_mapping.confirm { behavior = ConfirmBehavior.Insert, select = true},
+      --   c = function(fallback)
+      --     if cmp.visible() then
+      --       cmp.confirm { behavior = ConfirmBehavior.Insert, select = true}
+      --     else
+      --       fallback()
+      --     end
+      --   end,
+      -- },
       ["<C-l>"] = cmp_mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          if cmp.get_selected_entry() then
+            cmp.confirm { behavior = ConfirmBehavior.Insert, select = false }
+          else
+            cmp.select_next_item()
+          end
         elseif luasnip.expand_or_locally_jumpable() then
           luasnip.expand_or_jump()
         elseif jumpable(1) then
@@ -273,12 +255,18 @@ M.config = function()
           fallback()
         end
       end, { "i", "s" }),
-      ["<C-Space>"] = cmp_mapping.complete(),
+      ["<C-Space>"] = cmp_mapping(function ()
+        if cmp.visible() then
+          cmp.confirm { behavior = ConfirmBehavior.Insert, select = true }
+        else
+          cmp.complete()
+        end
+      end),
       ["<C-e>"] = cmp_mapping.abort(),
       ["<CR>"] = cmp_mapping(function(fallback)
         if cmp.visible() then
           if cmp.get_selected_entry() then
-            cmp.confirm { behavior = ConfirmBehavior.Replace, select = false }
+            cmp.confirm { behavior = ConfirmBehavior.Insert, select = false }
           else
             fallback()
           end
