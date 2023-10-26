@@ -202,7 +202,7 @@ return {
   navic_opts = {
     icons = {
       Array = icons_kind.Array .. " ",
-      Boolean = icons_kind.Boolean,
+      Boolean = icons_kind.Boolean .. " ",
       Class = icons_kind.Class .. " ",
       Color = icons_kind.Color .. " ",
       Constant = icons_kind.Constant .. " ",
@@ -245,10 +245,13 @@ return {
   winbar_fname = function()
     local bufs = vim.fn.tabpagebuflist()
     local tabcnt = #vim.api.nvim_list_tabpages()
+    local rec = {}
     local cnt = 0
     for _, bid in ipairs(bufs) do
       local bufname = vim.api.nvim_buf_get_name(bid)
-      if bufname:len() > 0 then
+      -- bufname must not empty and not a terminal buffer
+      if bufname:len() > 0 and bufname:sub(1, #"term://") ~= "term://" and rec[bid] ~= true then
+        rec[bid] = true
         cnt = cnt + 1
       end
     end
