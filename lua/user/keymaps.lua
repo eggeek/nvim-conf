@@ -72,7 +72,7 @@ local defaults = {
     ["<leader>sr"] = "<cmd>Telescope resume<cr>",
     ["<leader>mp"] = "<cmd>Telescope keymaps<cr>",
     ["<M-x>"]      = "<cmd>Telescope commands<cr>",
-    ["<M-o>"]      = "<cmd>Telescope lsp_document_symbols symbols=function,method,class<cr>",
+    ["<M-o>"]      = "<cmd>Telescope lsp_document_symbols symbols=module,function,method,class<cr>",
 
     ["<C-s>"]      = "<cmd>w<cr>",
     ["<leader>q"]  = "<cmd>lua vim.diagnostic.setloclist()<cr>",
@@ -87,7 +87,10 @@ local defaults = {
     ["<leader>tp"] = "<cmd>tabprev<cr>",
     ["<leader>tn"] = "<cmd>tabnext<cr>",
     ["<leader>z"]  = "<cmd>ColorizerToggle<cr>",
+
+    -- Lsp
     ["<leader>lf"] = "<cmd>lua vim.lsp.buf.format({timeout_ms = 1000000})<cr>",
+    ["<leader>ca"] = "<cmd>lua vim.lsp.buf.code_action()<cr>",
   },
 
   term_mode = {
@@ -102,6 +105,8 @@ local defaults = {
     -- Better indenting
     ["<"] = "<gv",
     [">"] = ">gv",
+    ["J"] = ":m '>+1<cr>gv=gv",
+    ["K"] = ":m '<-2<cr>gv=gv",
 
   },
 

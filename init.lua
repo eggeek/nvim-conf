@@ -46,6 +46,7 @@ spec "user.matchup"
 spec "user.vimtex"
 spec "user.nvim-tmux"
 spec "user.notify"
+spec "user.term"
 
 
 require "user.lazy"
