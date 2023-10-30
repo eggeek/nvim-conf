@@ -3,7 +3,7 @@ augroup InitFZF
         \ imap <buffer> <c-n> <down>
         \ imap <buffer> <c-p> <up>
 augroup end
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Todo'} }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
 
 function! FzfSpellSink(word)
   exe 'normal! "_ciw'.a:word
@@ -11,10 +11,10 @@ endfunction
 
 function! FzfSpell()
   let suggestions = spellsuggest(expand("<cword>"))
-  return fzf#run({'source': suggestions, 'sink': function("FzfSpellSink"), 'down': 10 })
+  return fzf#run({'source': suggestions, 'sink': function("FzfSpellSink"),
+        \ 'window': { 'width': 0.3, 'height': 0.3, 'yoffset': 1, 'xoffset': 0 } 
+        \})
 endfunction
-
-nnoremap z= :call FzfSpell()<CR>
 
 function! s:bibtex_cite_sink(lines)
   let r=system('bibtex-cite -prefix="\cite{" -postfix="}" -separator=","', a:lines)
