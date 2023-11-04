@@ -23,6 +23,7 @@ let g:vimtex_compiler_latexmk = {
 
 let g:vimtex_grammar_vlty = {'lt_command': 'languagetool'}
 
+let g:vimtex_complete_enabled = 0
 let g:tex_comment_nospell = 1
 let g:vimtex_matchparen_enabled = 0
 let g:matchup_override_vimtex = 1

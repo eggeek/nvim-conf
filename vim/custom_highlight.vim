@@ -1,6 +1,15 @@
 hi TelescopeMatching cterm=bold gui=bold guifg=#73C991
+hi CmpItemAbbrMatchFuzzy guifg=#E8AB53
+hi CmpItemAbbrMatch guifg=#E8AB53
+hi CmpItemAbbr    guifg=#7c838f
 hi Visual guibg=#264F78
-hi TabLineSel cterm=bold guifg=#1f2329 guibg=#75BEFF
+" hi TabLineSel cterm=bold guifg=#1f2329 guibg=#75BEFF
+hi TabLineSel cterm=bold guifg=#75BEFF guibg=#1f2c3b
+hi TabLine cterm=bold guifg=#535965 guibg=none
+hi TabLineFill guibg=none
+hi CmpGhostText guifg=#2D333C
+hi NormalFloat guibg=black
+hi FloatBorder cterm=bold guibg=black guifg=#ff007c
 
 "   fg = "#D4D4D4",
 " 	bg = "#121C27",
@@ -9,8 +18,8 @@ hi TabLineSel cterm=bold guifg=#1f2329 guibg=#75BEFF
 " 	accent = "#989EAE",
 " 	popup_back = "#2D2D30",
 " 	search_orange = "#613214",
-" 	search_blue = "#5e81ac",
-" 	white = "#D8DEE9",
+	" search_blue = "#5e81ac",
+	" white = "#D8DEE9",
 " 	gray = "#474E5E",
 " 	dark_gray = "#3e3e3e",
 " 	context = "#606060",

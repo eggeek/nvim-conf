@@ -40,7 +40,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
       return '[No Name]'
     else
       if a:fullname 
-        return fnamemodify(l:name, ':p')
+        return fnamemodify(l:name, ':p:m')
       else
         let aname = fnamemodify(l:name, ':p')
         let sname = fnamemodify(aname, ':t')
@@ -50,7 +50,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
             return '<'. test . '>'
           endif
         endif
-        return sname
+        return fnamemodify(sname, ':m')
       endif
     endif
   else
@@ -79,14 +79,6 @@ function! Vim_NeatTabLabel(n)
   let l:bufnr = l:buflist[l:winnr - 1]
   let l:fname = Vim_NeatBuffer(l:bufnr, 0)
   let l:num = a:n
-  let style = get(g:, 'config_vim_tab_style', 1)
-  if style == 0
-    return l:fname
-  elseif style == 1
-    return "[".l:num."] ".l:fname
-  elseif style == 2
-    return "".l:num." - ".l:fname
-  endif
   if getbufvar(l:bufnr, '&modified')
     return "[".l:num."] ".l:fname." +"
   endif
