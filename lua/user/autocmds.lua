@@ -79,15 +79,38 @@ local defs = {
   {
     {
       "BufWinEnter",
-      "BufFilePost",
+      -- "BufFilePost",
       "BufWritePost",
-      "TabClosed",
+      -- "TabClosed",
       "TabEnter",
     },
     {
       group = '_refresh_winbar',
       callback = function()
         require 'lualine'.refresh()
+      end
+    }
+  },
+  { -- restore the cursor location from last time
+    "BufReadPost",
+    {
+      group = "_cursor_loc",
+      pattern = "*",
+      callback = function()
+        vim.cmd [[
+          if line("'\"") > 1 && line("'\"") <= line("$") |
+          \	 exe "normal! g`\"" |
+          \ endif
+        ]]
+      end
+    }
+  },
+  { -- enable spell for text file
+    "FileType",
+    {
+      pattern = "text,tex,markdown",
+      callback = function ()
+        vim.cmd[[ setlocal spell spelllang=en ]]
       end
     }
   }
