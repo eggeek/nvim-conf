@@ -130,12 +130,12 @@ function M.common_dap_keymap()
 
   dap.listeners.before.event_terminated["dapui_config"] = function()
     notify("DBG Sesstion Terminated", "info")
-    dapui.close()
+    -- dapui.close()
   end
 
   dap.listeners.before.event_exited["dapui_config"] = function()
     notify("DBG Sesstion Exited", "info")
-    dapui.close()
+    -- dapui.close()
   end
 
   vim.keymap.set('n', '<M-b>', dap.toggle_breakpoint)
