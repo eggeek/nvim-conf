@@ -72,7 +72,6 @@ function M.RmDbgKeyMapping()
             v[key] = nil
           end
         end
-        print('mode:', mode, 'lhs:', lhs, 'rhs:', rhs, 'v:', vim.inspect(v))
         vim.keymap.set(mode, lhs, rhs, v)
       end
     end
