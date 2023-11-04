@@ -214,7 +214,6 @@ M.config = function()
           return true
         end,
       },
-      { name = "path" },
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "buffer" },
@@ -227,16 +226,13 @@ M.config = function()
       ["<C-j>"] = cmp_mapping.select_next_item({behavior = SelectBehavior.Select}, { "i", "c" }),
       ["<M-k>"] = cmp_mapping.scroll_docs(-4),
       ["<M-j>"] = cmp_mapping.scroll_docs(4),
-      -- ["<C-y>"] = cmp_mapping {
-      --   i = cmp_mapping.confirm { behavior = ConfirmBehavior.Insert, select = true},
-      --   c = function(fallback)
-      --     if cmp.visible() then
-      --       cmp.confirm { behavior = ConfirmBehavior.Insert, select = true}
-      --     else
-      --       fallback()
-      --     end
-      --   end,
-      -- },
+      ["<C-h>"] = cmp_mapping(function (fallback)
+        if jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end),
       ["<C-l>"] = cmp_mapping(function(fallback)
         if cmp.visible() then
           if cmp.get_selected_entry() then
@@ -249,19 +245,11 @@ M.config = function()
         elseif jumpable(1) then
           luasnip.jump(1)
         elseif has_words_before() then
-          -- cmp.complete()
-          fallback()
+          cmp.complete()
         else
           fallback()
         end
       end, { "i", "s" }),
-      ["<C-Space>"] = cmp_mapping(function ()
-        if cmp.visible() then
-          cmp.confirm { behavior = ConfirmBehavior.Insert, select = true }
-        else
-          cmp.complete()
-        end
-      end),
       ["<C-e>"] = cmp_mapping.abort(),
       ["<CR>"] = cmp_mapping(function(fallback)
         if cmp.visible() then

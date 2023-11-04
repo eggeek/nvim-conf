@@ -28,14 +28,15 @@ local M = {
         "rafamadriz/friendly-snippets",
       },
     },
-    {
-      "hrsh7th/cmp-nvim-lua",
-    },
+    -- {
+    --   "hrsh7th/cmp-nvim-lua",
+    -- },
   },
   event = "InsertEnter",
 }
 
 function M.config()
+  -- require "user.cmp-core".config()
   require "user.cmp-core".setup()
   -- config LunaSnip
   -- local utils = require "user.utils"
@@ -44,7 +45,7 @@ function M.config()
   -- paths[#paths + 1] = utils.join_paths(datdir, "site", "pack", "lazy", "opt", "friendly-snippets")
   require("luasnip.loaders.from_lua").lazy_load()
   -- require("luasnip.loaders.from_vscode").lazy_load { }
-  require("luasnip.loaders.from_snipmate").lazy_load()
+  -- require("luasnip.loaders.from_snipmate").lazy_load()
 end
 
 return M
