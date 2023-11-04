@@ -47,7 +47,10 @@ spec "user.vimtex"
 spec "user.nvim-tmux"
 spec "user.notify"
 spec "user.term"
-
+-- note taking
+spec "user.notetaking"
+-- misc
+spec "user.misc"
 
 require "user.lazy"
 
@@ -58,4 +61,3 @@ LoadVim 'vim/vimtex.vim'
 LoadVim 'vim/custom_highlight.vim'
 
 require 'user.autocmds'
-
