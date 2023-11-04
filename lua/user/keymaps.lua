@@ -22,6 +22,11 @@ local mode_adapters = {
   operator_pending_mode = "o",
 }
 
+local mode_adapters_rev = {
+  n = "normal_mode",
+  x = "visual_block_mode",
+}
+
 ---@class Keys
 ---@field insert_mode table
 ---@field normal_mode table
@@ -34,9 +39,20 @@ local mode_adapters = {
 local defaults = {
   insert_mode = {
     ["<C-s>"] = "<cmd>w<cr><esc>",
+    -- emacs style
+    ["<C-p>"] = "<Up>",
+    ["<C-n>"] = "<Down>",
+    ["<C-f>"] = "<Right>",
+    ["<C-b>"] = "<Left>",
+    ["<C-k>"] = "<C-o>d$",
+    ["<C-a>"] = "<C-o>^",
+    ["<C-e>"] = "<C-o>$",
   },
 
   normal_mode = {
+
+    -- Fzf
+    ["z="]         = "<cmd>call FzfSpell()<cr>",
 
     -- Resize with arrows
     ["<C-Up>"]     = ":resize -2<CR>",
@@ -51,6 +67,16 @@ local defaults = {
     -- Diagnostic
     ["[d"]         = "<cmd>lua vim.diagnostic.goto_prev()<cr>",
     ["]d"]         = "<cmd>lua vim.diagnostic.goto_next()<cr>",
+    ["<leader>q"]  = "<cmd>lua vim.diagnostic.setloclist()<cr>",
+    ["<leader>df"] = "<cmd>lua vim.diagnostic.open_float()<cr>",
+    ["<leader>dl"] = function()
+      local current_value = vim.diagnostic.config().virtual_text
+      if current_value then
+        vim.diagnostic.config({ virtual_text = false })
+      else
+        vim.diagnostic.config({ virtual_text = true })
+      end
+    end,
 
     -- nohl
     ["<M-l>"]      = "<cmd>nohlsearch<Bar>diffupdate<Bar>echo <CR>",
@@ -75,7 +101,6 @@ local defaults = {
     ["<M-o>"]      = "<cmd>Telescope lsp_document_symbols symbols=module,function,method,class<cr>",
 
     ["<C-s>"]      = "<cmd>w<cr>",
-    ["<leader>q"]  = "<cmd>lua vim.diagnostic.setloclist()<cr>",
     ["<leader>1"]  = "1gt",
     ["<leader>2"]  = "2gt",
     ["<leader>3"]  = "3gt",
@@ -121,15 +146,15 @@ local defaults = {
     -- runs conditionally
     ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
     ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
+
+    -- emacs style
+    -- ["<C-f>"] = "<Right>",
+    -- ["<C-b>"] = "<Left>",
+    -- ["<C-a>"] = "<Home>",
+    -- ["<C-e>"] = "<End>",
   },
 }
 
-if vim.fn.has "mac" == 1 then
-  defaults.normal_mode["<A-Up>"] = defaults.normal_mode["<C-Up>"]
-  defaults.normal_mode["<A-Down>"] = defaults.normal_mode["<C-Down>"]
-  defaults.normal_mode["<A-Left>"] = defaults.normal_mode["<C-Left>"]
-  defaults.normal_mode["<A-Right>"] = defaults.normal_mode["<C-Right>"]
-end
 
 -- Unsets all keybindings defined in keymaps
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
@@ -190,6 +215,14 @@ end
 -- Get the default keymappings
 function M.get_defaults()
   return defaults
+end
+
+function M.get_defaults_mode(mode)
+  if defaults[mode] ~= nil then
+    return defaults[mode]
+  else
+    return defaults[mode_adapters_rev[mode]]
+  end
 end
 
 return M
