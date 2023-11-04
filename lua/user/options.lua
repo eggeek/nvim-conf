@@ -1,4 +1,6 @@
 vim.g.completeopt = { "menuone", "noinsert", "noselect" }
+vim.o.foldenable = true
+vim.opt.colorcolumn = "120"
 vim.opt.swapfile = false -- creates a swapfile
 vim.o.cursorline = true
 vim.o.bdir = vim.fn.stdpath('state') .. '/backup'
@@ -48,10 +50,6 @@ vim.o.smartcase = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
