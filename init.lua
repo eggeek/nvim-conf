@@ -25,8 +25,7 @@ spec "user.lspconfig"
 spec "user.schemastore"
 spec "user.navic"
 spec "user.illuminate"
-spec "user.dap"
-spec "user.dapui"
+spec "user.debugger"
 
 -- search
 spec "user.telescope"

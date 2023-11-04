@@ -130,6 +130,8 @@ local defaults = {
     -- Better indenting
     ["<"] = "<gv",
     [">"] = ">gv",
+
+    -- Move current line / block with Alt-j/k ala vscode.
     ["J"] = ":m '>+1<cr>gv=gv",
     ["K"] = ":m '<-2<cr>gv=gv",
 
@@ -137,8 +139,8 @@ local defaults = {
 
   visual_block_mode = {
     -- Move current line / block with Alt-j/k ala vscode.
-    ["<A-j>"] = ":m '>+1<CR>gv-gv",
-    ["<A-k>"] = ":m '<-2<CR>gv-gv",
+    ["J"] = ":m '>+1<CR>gv-gv",
+    ["K"] = ":m '<-2<CR>gv-gv",
   },
 
   command_mode = {

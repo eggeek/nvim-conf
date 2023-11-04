@@ -69,6 +69,7 @@ local defs = {
         "tsplayground",
         "DressingSelect",
         "Jaq",
+        "dap-float"
       },
       callback = function()
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
@@ -82,7 +83,7 @@ local defs = {
       -- "BufFilePost",
       "BufWritePost",
       -- "TabClosed",
-      "TabEnter",
+      -- "TabEnter",
     },
     {
       group = '_refresh_winbar',
