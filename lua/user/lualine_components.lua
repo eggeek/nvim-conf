@@ -258,6 +258,9 @@ return {
 
     if cnt > 1 or tabcnt == 1 then
         local fpath = vim.api.nvim_eval_statusline("%f", {}).str
+        if fpath:sub(1, #"term://") == "term://" then
+          return ""
+        end
         fpath = fpath:gsub('/', '  ')
         local mod = vim.api.nvim_eval_statusline("%m", {}).str
         return '%=' .. fpath .. mod .. '%='

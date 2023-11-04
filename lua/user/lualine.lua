@@ -7,6 +7,7 @@ local components = require "user.lualine_components"
 function M.config()
   require("lualine").setup {
     options = {
+      theme = require 'user.lualine-theme',
       ignore_focus = { "NvimTree" },
       section_separators = '',
       component_separators = '',
