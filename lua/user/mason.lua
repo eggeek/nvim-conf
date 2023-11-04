@@ -25,7 +25,8 @@ M.servers = {
   "ruff_lsp",
   "texlab",
   "clangd",
-  "jdtls"
+  "jdtls",
+  "rust_analyzer",
   -- "marksman",
   -- "tailwindcss",
 }

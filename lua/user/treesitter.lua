@@ -41,8 +41,8 @@ function M.config()
     sync_install = false,
     highlight = {
       enable = true,
-      disable = { "markdown", "latex" },
-      additional_vim_regex_highlighting = false,
+      disable = { "latex", "tex" },
+      additional_vim_regex_highlighting = { "markdown" },
     },
 
     indent = { enable = true },
