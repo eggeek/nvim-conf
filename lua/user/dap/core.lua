@@ -25,13 +25,6 @@ local original = {
   ["x"] = {},
 }
 
-local function _clear()
-  original = {
-    ["n"] = {},
-    ["x"] = {},
-  }
-end
-
 local map = function(mode, lhs, rhs)
   -- not nil -> (mode, lhs, rhs) has been mapped before, e.g., restart
   if original[mode][lhs] ~= nil then

@@ -37,11 +37,8 @@ spec "user.fzf"
 spec "user.cmp"
 spec "user.autopairs"
 spec "user.comment"
--- spec "user.extras.surround"
 
 -- enhancement
-spec "user.colorizer"
-spec "user.matchup"
 spec "user.vimtex"
 spec "user.nvim-tmux"
 spec "user.notify"
@@ -59,4 +56,5 @@ LoadVim 'vim/emacs-move.vim'
 LoadVim 'vim/vimtex.vim'
 LoadVim 'vim/custom_highlight.vim'
 
-require 'user.autocmds'
+-- after/plugin/dap.lua
+-- after/plugin/autocmds.lua
