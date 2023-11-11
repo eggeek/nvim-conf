@@ -13,6 +13,12 @@ local M = {
       vim.g.matchup_matchpref = { html = { nolists = 1 } }
       vim.g.matchup_matchparen_offscreen = { method = "popup", scrolloff = 1 }
     end
-  }
+  },
+  { -- lsp progress
+    "j-hui/fidget.nvim",
+    tag = "legacy",
+    event = "LspAttach",
+    opts = { },
+  },
 }
 return M
