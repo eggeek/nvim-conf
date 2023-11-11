@@ -44,9 +44,10 @@ local defaults = {
     ["<C-n>"] = "<Down>",
     ["<C-f>"] = "<Right>",
     ["<C-b>"] = "<Left>",
-    ["<C-k>"] = "<C-o>d$",
-    ["<C-a>"] = "<C-o>^",
-    ["<C-e>"] = "<C-o>$",
+    -- use normal! rather than <C-O> to avoid trigger events
+    ["<C-k>"] = "<cmd>normal!d$<cr><END>",
+    ["<C-a>"] = "<cmd>normal!^<cr>",
+    ["<C-e>"] = "<END>",
   },
 
   normal_mode = {
