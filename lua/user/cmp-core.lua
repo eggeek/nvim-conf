@@ -204,29 +204,22 @@ M.config = function()
       documentation = cmp_window.bordered(),
     },
     sources = {
-      {
-        name = "nvim_lsp",
-        entry_filter = function(entry, ctx)
-          local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
-          if kind == "Snippet" and ctx.prev_context.filetype == "java" then
-            return false
-          end
-          return true
-        end,
-      },
+      -- { name = 'nvim_lsp_signature_help' },
+      { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "nvim_lua" },
-      { name = "buffer" },
+      -- { name = "nvim_lua" },
+      { name = "path" },
+      { name = "buffer",    keyword_length = 3 },
       { name = "treesitter" },
       -- { name = "crates" },
       -- { name = "tmux" },
     },
     mapping = {
-      ["<C-k>"] = cmp_mapping.select_prev_item({behavior = SelectBehavior.Select}, { "i", "c" }),
-      ["<C-j>"] = cmp_mapping.select_next_item({behavior = SelectBehavior.Select}, { "i", "c" }),
+      ["<C-k>"] = cmp_mapping.select_prev_item({ behavior = SelectBehavior.Select }, { "i", "c" }),
+      ["<C-j>"] = cmp_mapping.select_next_item({ behavior = SelectBehavior.Select }, { "i", "c" }),
       ["<M-k>"] = cmp_mapping.scroll_docs(-4),
       ["<M-j>"] = cmp_mapping.scroll_docs(4),
-      ["<C-h>"] = cmp_mapping(function (fallback)
+      ["<C-h>"] = cmp_mapping(function(fallback)
         if jumpable(-1) then
           luasnip.jump(-1)
         else
