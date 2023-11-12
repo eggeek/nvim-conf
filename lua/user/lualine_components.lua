@@ -60,7 +60,8 @@ local branch = "%#SLGitIcon#" .. icons.git.Branch .. "%*" .. "%#SLBranchName#"
 return {
   mode = {
     function()
-      return " " .. icons.ui.Target .. " "
+      -- return " " .. icons.ui.Target .. " "
+      return " ❖ "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -97,8 +98,7 @@ return {
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV" or os.getenv "VIRTUAL_ENV"
         if venv then
-          local py_icon, _ = require "nvim-web-devicons".get_icon ".py"
-          return string.format(" " .. py_icon .. " (%s)", env_cleanup(venv))
+          return string.format("[%s]", env_cleanup(venv))
         end
       end
       return ""

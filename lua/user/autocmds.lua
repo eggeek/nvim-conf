@@ -88,7 +88,9 @@ local defs = {
     {
       group = '_refresh_winbar',
       callback = function()
-        require 'lualine'.refresh()
+        require 'lualine'.refresh({
+          place = {'winbar'}
+        })
       end
     }
   },
