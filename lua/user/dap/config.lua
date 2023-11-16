@@ -16,7 +16,7 @@ local M = {
   stopped = {
     text = icons.ui.BoldArrowRight,
     texthl = "DiagnosticSignWarn",
-    linehl = "Visual",
+    linehl = "DapStoppedLine",
     numhl = "DiagnosticSignWarn",
   },
   log = {

@@ -88,7 +88,7 @@ function M.RmDbgKeyMapping()
 end
 
 function M.common_dap_keymap()
-  -- auto open dapui, manually close 
+  -- auto open dapui, manually close
   dap.listeners.after.event_initialized["dapui_config"] = function()
     notify("DBG Sesstion Start", "info")
     M.DbgKeyMapping()
@@ -97,7 +97,10 @@ function M.common_dap_keymap()
 
   vim.keymap.set('n', '<M-b>', dap.toggle_breakpoint)
   vim.keymap.set('n', '<M-B>', function() dap.set_breakpoint(vim.fn.input("Condition: "), vim.fn.input("Num: "), nil) end)
-  vim.keymap.set('n', '<leader>dd', dap.continue)
+  vim.keymap.set('n', '<leader>dd', function()
+    M.common_dap_conf()
+    dap.continue()
+  end)
 end
 
 function M.common_dap_conf()
@@ -113,7 +116,6 @@ M.setup = function()
   dap.set_log_level("info")
 
   M.common_dap_keymap()
-  M.common_dap_conf()
 
   dap.adapters.python = {
     type = 'executable',
