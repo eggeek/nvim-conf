@@ -39,7 +39,6 @@ spec "user.autopairs"
 spec "user.comment"
 
 -- enhancement
-spec "user.vimtex"
 spec "user.nvim-tmux"
 spec "user.notify"
 spec "user.term"

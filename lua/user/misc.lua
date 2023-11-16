@@ -3,6 +3,7 @@ local M = {
     "vale1410/vim-minizinc",
     ft = "zinc"
   },
+  'lervag/vimtex',
   {
     'norcalli/nvim-colorizer.lua',
     event = 'VeryLazy',
