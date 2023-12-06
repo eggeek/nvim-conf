@@ -20,20 +20,18 @@ function M.config()
         "NvimTree",
         "Trouble",
         "text",
-
       }
     },
     indent = {
       char = icons.ui.LineLeft,
+      smart_indent_cap = true
     },
-    -- char = icons.ui.LineLeft,
-    -- show_trailing_blankline_indent = false,
-    -- show_first_indent_level = true,
-    -- use_treesitter = true,
+
     scope = {
       enabled = true,
       show_start = false,
       show_end = false,
+      -- highlight = { "Function", "Label" },
       highlight = "@comment"
     },
   }

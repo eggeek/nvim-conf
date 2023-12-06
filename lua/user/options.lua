@@ -1,8 +1,8 @@
 vim.g.completeopt = { "menuone", "noinsert", "noselect" }
 vim.o.foldenable = true
-vim.opt.colorcolumn = "120"
+vim.opt.textwidth = 120
 vim.opt.swapfile = false -- creates a swapfile
-vim.o.cursorline = true
+-- vim.o.cursorline = true
 vim.o.bdir = vim.fn.stdpath('state') .. '/backup'
 vim.o.backup = true
 vim.opt.laststatus = 3

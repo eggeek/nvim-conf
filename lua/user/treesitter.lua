@@ -47,19 +47,13 @@ function M.config()
 
     indent = { enable = true },
 
-    matchup = {
-      enable = true
+    matchup = { -- enable this significantly slow down ui
+      enable = false
       -- enable = { "astro" },
       -- disable = { "lua" },
     },
 
     autotag = { enable = true },
-
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
-
     autopairs = { enable = true },
 
     textobjects = {
