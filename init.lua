@@ -22,7 +22,7 @@ spec "user.indentline"
 -- lsp
 spec "user.mason"
 spec "user.lspconfig"
-spec "user.schemastore"
+-- spec "user.schemastore"
 spec "user.navic"
 spec "user.illuminate"
 spec "user.debugger"
