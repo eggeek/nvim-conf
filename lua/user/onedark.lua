@@ -1,17 +1,23 @@
 local M = {
   'navarasu/onedark.nvim',
-  lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+  lazy = false, -- make sure we load this during startup if it is your main colorscheme
 }
 
 function M.config()
   require 'onedark'.setup {
-    transparent = true,
-    style = 'darker',
+    transparent = false,
+    style = 'cool',
     -- toggle theme style ---
-    toggle_style_key = "<leader>ts",                                                   -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-    toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
+    toggle_style_key = "<leader>ts",
+    toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' },
     code_style = {
-      functions = 'bold'
+      -- functions = 'bold'
+    },
+    colors = {
+      -- bg0 = '#1e222a'
+      -- bg0 = '#1a1b21'
+      bg0 = '#0d1117',
+      -- bg0 = '#010409'
     }
   }
   vim.cmd.colorscheme "onedark"
