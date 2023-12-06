@@ -6,6 +6,7 @@ local M = {
     {
       "folke/neodev.nvim",
       "mason-lspconfig.nvim",
+      "ray-x/lsp_signature.nvim",
     },
   },
 }
@@ -23,6 +24,16 @@ end
 
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
+  require "lsp_signature".on_attach({
+    floating_window = false,
+    hint_enable = false,            -- virtual hint enable
+    doc_line = 0,
+    toggle_key = '<M-x>',           -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+    select_signature_key = '<M-n>', -- cycle to next signature, e.g. '<M-n>' function overloading
+  }, bufnr)                         -- Note: add in lsp client on-attach
+  if client.server_capabilities.documentSymbolProvider then
+    require 'nvim-navic'.attach(client, bufnr)
+  end
 end
 
 function M.common_capabilities()
@@ -55,9 +66,9 @@ function M.config()
       active = true,
       values = {
         { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+        { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+        { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
       },
     },
     virtual_text = false,
@@ -81,7 +92,6 @@ function M.config()
   end
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
   for _, server in pairs(servers) do
@@ -100,7 +110,6 @@ function M.config()
         library = { plugins = { "nvim-dap-ui" }, types = true },
       }
     end
-
     lspconfig[server].setup(opts)
   end
 end
