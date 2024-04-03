@@ -11,7 +11,7 @@ function M.config()
 
   require("telescope").setup {
     defaults = {
-      prompt_prefix = icons.ui.Telescope .. " ",
+      prompt_prefix = icons.ui.Search .. " : ",
       selection_caret = icons.ui.Forward .. " ",
       -- entry_prefix = "   ",
       initial_mode = "insert",
