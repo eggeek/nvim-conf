@@ -30,6 +30,7 @@ M.servers = {
   "rust_analyzer",
   -- "marksman",
   -- "tailwindcss",
+  "cmake"
 }
 
 function M.config()
