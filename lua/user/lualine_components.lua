@@ -61,7 +61,7 @@ return {
   mode = {
     function()
       -- return " " .. icons.ui.Target .. " "
-      return " ❖ "
+      return "  "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -249,25 +249,33 @@ return {
     local cnt = 0
     for _, bid in ipairs(bufs) do
       local bufname = vim.api.nvim_buf_get_name(bid)
+      if vim.endswith(bufname, "BqfPreviewFloatWin") or
+          vim.endswith(bufname, "BqfPreviewScrollBar") then
+        -- local ft = vim.api.nvim_buf_get_option(bid, "filetype")
+        -- print(bid, bufname, "filetype:", ft, "cnt:", cnt)
+        goto continue
+      end
       -- bufname must not empty and not a terminal buffer
       if bufname:len() > 0 and bufname:sub(1, #"term://") ~= "term://" and rec[bid] ~= true then
         rec[bid] = true
         cnt = cnt + 1
+        -- local ft = vim.api.nvim_buf_get_option(bid, "filetype")
+        -- print("count it", bid, bufname, "filetype:", ft, "cnt:", cnt)
       end
+      ::continue::
     end
 
     if cnt > 1 or tabcnt == 1 then
-        local fpath = vim.api.nvim_eval_statusline("%f", {}).str
-        if fpath:sub(1, #"term://") == "term://" then
-          return ""
-        end
-        fpath = fpath:gsub('/', '  ')
-        local mod = vim.api.nvim_eval_statusline("%m", {}).str
-        return '%=' .. fpath .. mod .. '%='
+      local fpath = vim.api.nvim_eval_statusline("%f", {}).str
+      if fpath:sub(1, #"term://") == "term://" then
+        return ""
+      end
+      fpath = fpath:gsub('/', '  ')
+      local mod = vim.api.nvim_eval_statusline("%m", {}).str
+      return '%=' .. fpath .. mod .. '%='
     else
       return ""
     end
-
   end,
 
 }
