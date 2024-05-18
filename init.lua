@@ -9,6 +9,10 @@ function LoadVim(fname)
   vim.cmd(cmd)
 end
 
+if vim.g.neovide then
+  require 'user.neovide-opt'
+end
+
 require 'user.options'
 require 'user.keymaps'.load_defaults()
 -- ui
