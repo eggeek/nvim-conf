@@ -7,21 +7,21 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 M.methods.has_words_before = has_words_before
-
----@deprecated use M.methods.has_words_before instead
-M.methods.check_backspace = function()
-  return not has_words_before()
-end
-
-local T = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local function feedkeys(key, mode)
-  vim.api.nvim_feedkeys(T(key), mode, true)
-end
-
-M.methods.feedkeys = feedkeys
+--
+-- ---@deprecated use M.methods.has_words_before instead
+-- M.methods.check_backspace = function()
+--   return not has_words_before()
+-- end
+--
+-- local T = function(str)
+--   return vim.api.nvim_replace_termcodes(str, true, true, true)
+-- end
+--
+-- local function feedkeys(key, mode)
+--   vim.api.nvim_feedkeys(T(key), mode, true)
+-- end
+--
+-- M.methods.feedkeys = feedkeys
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
 ---@param dir number 1 for forward, -1 for backward; defaults to 1

@@ -6,11 +6,11 @@ local M = {
 function M.config()
   require("project_nvim").setup {
     on_config_done = nil,
-    manual_mode = true,
+    manual_mode = false,
     detection_methods = { "pattern" },
-    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
+    patterns = { "!.gitconfig", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
     ignore_lsp = {},
-    exclude_dirs = {},
+    exclude_dirs = { },
     show_hidden = false,
     silent_chdir = true,
     scope_chdir = "global",
