@@ -21,7 +21,7 @@ function M.config()
       lualine_c = {
         {
           "navic",
-          color_correction = 'static',
+          color_correction = 'dynamic',
           navic_opts = components.navic_opts,
           padding = { left = 1, right = 0 }
         }

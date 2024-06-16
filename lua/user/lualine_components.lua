@@ -61,7 +61,7 @@ return {
   mode = {
     function()
       -- return " " .. icons.ui.Target .. " "
-      return "  "
+      return "^•⩊•^"
     end,
     padding = { left = 0, right = 0 },
     color = {},
