@@ -54,16 +54,26 @@ function M.config()
     post_hook = nil,
   }
   local api = require('Comment.api')
-  vim.keymap.set('n', '<C-_>', api.toggle.linewise.current)
+
+  if vim.g.neovide then
+    vim.keymap.set("n", "<C-/>", api.toggle.linewise.current)
+  else
+    vim.keymap.set('n', '<C-_>', api.toggle.linewise.current)
+  end
 
   local esc = vim.api.nvim_replace_termcodes(
     '<ESC>', true, false, true
   )
   -- Toggle selection (linewise)
-  vim.keymap.set('x', '<C-_>', function()
-    vim.api.nvim_feedkeys(esc, 'nx', false)
-    api.toggle.linewise(vim.fn.visualmode())
-  end)
+  local xToggle = function()
+      vim.api.nvim_feedkeys(esc, 'nx', false)
+      api.toggle.linewise(vim.fn.visualmode())
+    end
+  if vim.g.neovide then
+    vim.keymap.set('x', '<C-/>', xToggle)
+  else
+    vim.keymap.set('x', '<C-_>', xToggle)
+  end
 end
 
 return M
