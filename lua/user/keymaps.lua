@@ -56,14 +56,14 @@ local defaults = {
     ["z="]         = "<cmd>call FzfSpell()<cr>",
 
     -- Resize with arrows
-    ["<C-Up>"]     = ":resize -2<CR>",
-    ["<C-Down>"]   = ":resize +2<CR>",
-    ["<C-Left>"]   = ":vertical resize -2<CR>",
-    ["<C-Right>"]  = ":vertical resize +2<CR>",
+    ["<C-Up>"]     = "<cmd>resize -2<CR>",
+    ["<C-Down>"]   = "<cmd>resize +2<CR>",
+    ["<C-Left>"]   = "<cmd>vertical resize -2<CR>",
+    ["<C-Right>"]  = "<cmd>vertical resize +2<CR>",
 
     -- QuickFix
-    ["]q"]         = ":cnext<CR>",
-    ["[q"]         = ":cprev<CR>",
+    ["]q"]         = "<cmd>cnext<CR>",
+    ["[q"]         = "<cmd>cprev<CR>",
 
     -- Diagnostic
     ["[d"]         = "<cmd>lua vim.diagnostic.goto_prev()<cr>",
@@ -93,6 +93,7 @@ local defaults = {
 
     -- Telescope
     ["<C-p>"]      = "<cmd>Telescope find_files previewer=false<cr>",
+    ["<leader>bf"] = "<cmd>Telescope buffers<cr>",
     ["<leader>/"]  = "<cmd>Telescope grep_string<cr>",
     ["<leader>;"]  = "<cmd>Telescope live_grep<cr>",
     ["<leader>sd"] = "<cmd>Telescope diagnostics<cr>",
