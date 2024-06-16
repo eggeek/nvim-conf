@@ -41,6 +41,8 @@ local map = function(mode, lhs, rhs)
 end
 
 local unmap = function(mode, lhs, item)
+
+  -- print("mode:", mode, "lhs:", vim.inspect(lhs), "item:", vim.inspect(item))
   -- remove from original
   original[mode][lhs] = nil
 
@@ -50,21 +52,22 @@ local unmap = function(mode, lhs, item)
   else -- map to original
     -- rhs is '' if map to lua callback function
     local rhs      = item.rhs or ''
-    item.lhs       = nil
-    item.lhsraw    = nil
-    item.lhsrawalt = nil
-    item.rhs       = nil
-    item.mode      = nil
-    item.sid       = nil
-    item.lnum      = nil
+    -- item.lhs       = nil
+    -- item.lhsraw    = nil
+    -- item.lhsrawalt = nil
+    -- item.rhs       = nil
+    -- item.mode      = nil
+    -- item.sid       = nil
+    -- item.lnum      = nil
     -- remove zero value options, e.g., {expr=0}
-    for key, val in pairs(item) do
-      if val == 0 then
-        item[key] = nil
-      end
-    end
+    -- for key, val in pairs(item) do
+    --   if val == 0 then
+    --     item[key] = nil
+    --   end
+    -- end
     -- print("mode:", mode, "lhs:", lhs, "rhs:", rhs, "v:", vim.inspect(item))
-    vim.keymap.set(mode, lhs, rhs, item)
+    -- vim.keymap.set(mode, lhs, rhs, item)
+    vim.keymap.set(mode, lhs, rhs)
   end
 end
 
@@ -80,7 +83,7 @@ end
 function M.RmDbgKeyMapping()
   notify("Remove Debug Keymapping", "info")
   for mode, mapping in pairs(original) do
-    -- print("mapping:", vim.inspect(mapping))
+    -- print("mode:", mode, "mapping:", vim.inspect(mapping))
     for lhs, v in pairs(mapping) do
       unmap(mode, lhs, v)
     end
