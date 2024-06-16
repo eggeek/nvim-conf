@@ -1,13 +1,26 @@
 return {
   settings = {
+    pyright = {
+      disableOrganizeImports = true,   -- Using Ruff
+    },
     python = {
       analysis = {
+        ignore = { '*' }, -- Using Ruff
         autoSearchPaths = true,
         useLibraryCodeForTypes = false,
         diagnosticMode = 'openFilesOnly',
         stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
-        typeCheckingMode = 'basic'
+        typeCheckingMode = 'basic',
       },
     },
   },
+  capabilities = {
+    textDocument = {
+      publishDiagnostics = {
+        tagSupport = {
+          valueSet = { 2 },
+        },
+      },
+    },
+  }
 }
