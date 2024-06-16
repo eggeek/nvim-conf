@@ -37,10 +37,12 @@ function M.config()
       mappings = {
         i = {
           ["<C-j>"] = actions.move_selection_next,
+          ["<C-n>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
+          ["<C-p>"] = actions.move_selection_previous,
           ["<C-c>"] = actions.close,
-          ["<C-n>"] = actions.cycle_history_next,
-          ["<C-p>"] = actions.cycle_history_prev,
+          ["<C-h>"] = actions.cycle_history_next,
+          ["<C-l>"] = actions.cycle_history_prev,
           ["<C-q>"] = function(...)
             actions.smart_send_to_qflist(...)
             actions.open_qflist(...)
@@ -71,8 +73,8 @@ function M.config()
 
       buffers = {
         theme = "dropdown",
-        previewer = false,
-        initial_mode = "normal",
+        previewer = true,
+        initial_mode = "insert",
         mappings = {
           i = {
             ["<C-d>"] = actions.delete_buffer,

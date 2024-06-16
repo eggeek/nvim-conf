@@ -32,6 +32,7 @@ function M.config()
       "lua",
       "markdown",
       "markdown_inline",
+      "latex",
       "bash",
       "python",
       "cpp",
