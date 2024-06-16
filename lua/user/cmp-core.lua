@@ -76,7 +76,8 @@ M.config = function()
       -- keyword_length = 2,
     },
     experimental = {
-      ghost_text = { hl_group = "CmpGhostText" },
+      -- ghost_text = { hl_group = "CmpGhostText" },
+      ghost_text = false,
       native = false,
     },
     formatting = {
