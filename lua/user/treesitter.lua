@@ -37,6 +37,7 @@ function M.config()
       "python",
       "cpp",
       "rust",
+      "vimdoc"
     }, -- put the language you want in this array
     ignore_install = { "" },
     sync_install = false,
