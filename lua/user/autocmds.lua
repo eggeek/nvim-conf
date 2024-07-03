@@ -89,7 +89,7 @@ local defs = {
       group = '_refresh_winbar',
       callback = function()
         require 'lualine'.refresh({
-          place = {'winbar'}
+          place = { 'winbar' }
         })
       end
     }
@@ -112,9 +112,18 @@ local defs = {
     "FileType",
     {
       pattern = "text,tex,markdown",
-      callback = function ()
-        vim.cmd[[ setlocal spell spelllang=en ]]
+      callback = function()
+        vim.cmd [[ setlocal spell spelllang=en ]]
       end
+    }
+  },
+
+  {
+    { "BufRead", "BufWinEnter", "BufNewFile", "BufWritePost" },
+    {
+      callback = function()
+        require("lint").try_lint()
+      end,
     }
   }
 }

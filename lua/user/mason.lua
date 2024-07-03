@@ -23,15 +23,23 @@ M.servers = {
   "bashls",
   -- "jsonls",
   -- "yamlls",
-  "ruff_lsp",
   "texlab",
   "clangd",
   -- "jdtls",
   "rust_analyzer",
   -- "marksman",
   -- "tailwindcss",
-  "cmake"
+  "cmake",
+  "julials"
 }
+
+M.linters = {
+  "ruff",
+  -- "mypy",
+}
+
+M.installed_list = require "user.utils".merge_tbls(
+  M.servers, M.linters)
 
 function M.config()
   require("mason").setup {
@@ -40,7 +48,7 @@ function M.config()
     },
   }
   require("mason-lspconfig").setup {
-    ensure_installed = M.servers,
+    ensure_installed = M.installed_list
   }
 end
 

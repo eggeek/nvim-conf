@@ -6,11 +6,11 @@ return {
     python = {
       analysis = {
         ignore = { '*' }, -- Using Ruff
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = false,
-        diagnosticMode = 'openFilesOnly',
-        stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
-        typeCheckingMode = 'basic',
+        -- autoSearchPaths = true,
+        -- useLibraryCodeForTypes = false,
+        -- diagnosticMode = 'openFilesOnly',
+        -- stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
+        -- typeCheckingMode = 'basic',
       },
     },
   },
