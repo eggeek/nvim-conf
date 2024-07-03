@@ -2,6 +2,7 @@ vim.o.guifont = "CaskaydiaCove Nerd Font:h11"
 vim.o.clipboard = 'unnamedplus'
 vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_scroll_animation_length = 0
+vim.g.neovide_position_animation_length = 0
 
 vim.g.neovide_scale_factor = 1.0
 local change_scale_factor = function(delta)
