@@ -118,14 +118,14 @@ local defs = {
     }
   },
 
-  {
-    { "BufRead", "BufWinEnter", "BufNewFile", "BufWritePost" },
-    {
-      callback = function()
-        require("lint").try_lint()
-      end,
-    }
-  }
+  -- {
+  --   { "BufRead", "BufWinEnter", "BufNewFile", "BufWritePost" },
+  --   {
+  --     callback = function()
+  --       require("lint").try_lint()
+  --     end,
+  --   }
+  -- }
 }
 
 require "user.utils".define_autocmds(defs)

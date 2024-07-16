@@ -5,7 +5,7 @@ local M = {
 
 function M.config()
   require('lint').linters_by_ft = {
-    python = { 'ruff', "mypy" }
+    python = { "mypy" }
   }
 end
 

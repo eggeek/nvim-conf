@@ -19,6 +19,7 @@ M.servers = {
   -- "tsserver",
   -- "astro",
   "pyright",
+  "ruff",
   -- "pylyzer",
   "bashls",
   -- "jsonls",
@@ -33,13 +34,12 @@ M.servers = {
   "julials"
 }
 
-M.linters = {
-  "ruff",
-  -- "mypy",
-}
-
-M.installed_list = require "user.utils".merge_tbls(
-  M.servers, M.linters)
+-- M.linters = {
+--   -- "mypy",
+-- }
+--
+-- M.installed_list = require "user.utils".merge_tbls(
+--   M.servers, M.linters)
 
 function M.config()
   require("mason").setup {
@@ -48,7 +48,7 @@ function M.config()
     },
   }
   require("mason-lspconfig").setup {
-    ensure_installed = M.installed_list
+    ensure_installed = M.servers
   }
 end
 

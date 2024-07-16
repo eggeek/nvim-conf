@@ -26,7 +26,7 @@ spec "user.indentline"
 -- lsp
 spec "user.mason"
 spec "user.lspconfig"
-spec "user.linter"
+-- spec "user.linter"
 -- spec "user.schemastore"
 spec "user.navic"
 spec "user.illuminate"
