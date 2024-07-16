@@ -8,7 +8,7 @@ local M = {
 function M.config()
   local icons = require "user.icons"
   local actions = require "telescope.actions"
-
+  local action_layout = require("telescope.actions.layout")
   require("telescope").setup {
     defaults = {
       prompt_prefix = icons.ui.Search .. " : ",
@@ -36,6 +36,9 @@ function M.config()
 
       mappings = {
         i = {
+          ["<C-u>"] = false, -- use <C-u> to clear prompt
+          ["<C-e>"] = actions.preview_scrolling_up,
+          ["<C-y>"] = actions.preview_scrolling_down,
           ["<C-j>"] = actions.move_selection_next,
           ["<C-n>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
@@ -48,12 +51,14 @@ function M.config()
             actions.open_qflist(...)
           end,
           ["<CR>"] = actions.select_default,
+          ["<M-p>"] = action_layout.toggle_preview,
         },
         n = {
           ["<esc>"] = actions.close,
           ["j"] = actions.move_selection_next,
           ["k"] = actions.move_selection_previous,
           ["q"] = actions.close,
+          ["p"] = action_layout.toggle_preview,
         },
       },
     },
