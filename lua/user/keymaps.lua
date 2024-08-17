@@ -89,6 +89,8 @@ local defaults = {
     -- Keey centered
     ["n"]          = "nzzzv",
     ["N"]          = "Nzzzv",
+    ["j"]          = "gj",
+    ["k"]          = "gk",
     ["J"]          = "mzJ`z",
 
     -- Telescope
