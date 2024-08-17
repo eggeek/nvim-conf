@@ -10,6 +10,11 @@ local keymaps = {
     ["<C-C>"]      = dap.continue,
     ["<C-G>"]      = dap.step_out,
     ["<C-R>"]      = dap.run_to_cursor,
+    ["<C-W>="]     = function ()
+      if dap.session() then
+        dapui.open({ reset = true })
+      end
+    end,
     ["<leader>dx"] = function()
       dap.terminate({}, {}, M.RmDbgKeyMapping)
       dapui.close()
@@ -41,7 +46,6 @@ local map = function(mode, lhs, rhs)
 end
 
 local unmap = function(mode, lhs, item)
-
   -- print("mode:", mode, "lhs:", vim.inspect(lhs), "item:", vim.inspect(item))
   -- remove from original
   original[mode][lhs] = nil
@@ -51,7 +55,7 @@ local unmap = function(mode, lhs, item)
     vim.keymap.del(mode, lhs)
   else -- map to original
     -- rhs is '' if map to lua callback function
-    local rhs      = item.rhs or ''
+    local rhs = item.rhs or ''
     -- item.lhs       = nil
     -- item.lhsraw    = nil
     -- item.lhsrawalt = nil
