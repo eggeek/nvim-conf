@@ -47,6 +47,7 @@ spec "user.comment"
 spec "user.nvim-tmux"
 spec "user.notify"
 spec "user.term"
+spec "user.surround"
 -- note taking
 spec "user.notetaking"
 -- misc
