@@ -48,7 +48,7 @@ function M.config()
       additional_vim_regex_highlighting = { "markdown" },
     },
 
-    indent = { enable = true },
+    indent = { enable = false },
 
     matchup = { -- enable this significantly slow down ui
       enable = false

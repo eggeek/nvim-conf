@@ -32,16 +32,16 @@ local M = {
       ]]
     end
   },
-  {
-    "ggandor/leap.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "tpope/vim-repeat"
-    },
-    config = function ()
-      require('leap').create_default_mappings()
-    end
-  },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "tpope/vim-repeat"
+  --   },
+  --   config = function ()
+  --     require('leap').create_default_mappings()
+  --   end
+  -- },
   { -- predefined stubs for pyright
     "microsoft/python-type-stubs",
     cond = false
