@@ -27,8 +27,8 @@ let g:vimtex_compiler_latexmk = {
 let g:vimtex_complete_enabled = 0
 let g:tex_comment_nospell = 1
 let g:vimtex_matchparen_enabled = 1
-let g:matchup_override_vimtex = 0
-let g:matchup_matchparen_deferred = 1
+" let g:matchup_override_vimtex = 0
+" let g:matchup_matchparen_deferred = 1
 let g:vimtex_quickfix_open_on_warning = 0
 
 nmap <localleader>wc :VimtexCountWords<CR>
