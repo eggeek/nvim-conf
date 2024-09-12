@@ -79,11 +79,13 @@ local defs = {
   },
   {
     {
-      "BufWinEnter",
-      -- "BufFilePost",
+			"BufAdd",
+			"BufNew",
+			"BufDelete",
       "BufWritePost",
-      -- "TabClosed",
-      -- "TabEnter",
+			"BufHidden",
+      "TabClosed",
+      "TabEnter",
     },
     {
       group = '_refresh_winbar',
