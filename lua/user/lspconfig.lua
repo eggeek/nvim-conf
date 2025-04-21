@@ -94,7 +94,14 @@ function M.config()
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
+	-- not to config the following servers in lspconfig
+	local skip_servers = {
+		"rust_analyzer"
+	}
   for _, server in pairs(servers) do
+		if require "user/utils".table_contains(skip_servers, server) then
+			goto continue
+		end
     local opts = {
       on_attach = M.on_attach,
       capabilities = M.common_capabilities(),
@@ -111,6 +118,7 @@ function M.config()
       }
     end
     lspconfig[server].setup(opts)
+		::continue::
   end
 end
 

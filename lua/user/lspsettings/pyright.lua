@@ -10,7 +10,7 @@ return {
         -- autoSearchPaths = true,
         -- useLibraryCodeForTypes = false,
         diagnosticMode = 'openFilesOnly',
-        stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
+        -- stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
         typeCheckingMode = 'basic',
       },
     },

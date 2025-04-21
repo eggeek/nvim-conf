@@ -39,6 +39,7 @@ function M.config()
       "rust",
       "vimdoc",
       "query",
+			"typst",
     }, -- put the language you want in this array
     ignore_install = { "" },
     sync_install = false,

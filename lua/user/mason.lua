@@ -7,6 +7,18 @@ local M = {
       lazy = true,
     },
     "nvim-lua/plenary.nvim",
+		{
+			'mrcjkb/rustaceanvim',
+			version = '^5', -- Recommended
+			config = function ()
+				vim.g.rustaceanvim = {
+					server = {
+						on_attach = require("user/lspconfig").on_attach,
+					}
+				}
+			end,
+			lazy = false, -- This plugin is already lazy
+		}
   },
   lazy = true,
   event = "User FileOpened",
@@ -27,9 +39,10 @@ M.servers = {
   "texlab",
   "clangd",
   -- "jdtls",
-  "rust_analyzer",
+  "rust_analyzer", -- using rustaceanvim
   -- "marksman",
   -- "tailwindcss",
+	"tinymist",
   "cmake",
   "julials"
 }

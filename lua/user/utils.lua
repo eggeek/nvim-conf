@@ -14,6 +14,17 @@ function M.define_autocmds(definitions)
   end
 end
 
+function M.table_contains(tbl, val)
+	local found = false
+	for _, v in pairs(tbl) do
+		if v == val then
+			found = true
+			break
+		end
+	end
+	return found
+end
+
 function M.require_on_index(require_path)
   return setmetatable({}, {
     __index = function(_, key)
