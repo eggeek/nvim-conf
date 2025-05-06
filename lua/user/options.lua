@@ -1,5 +1,6 @@
 vim.g.completeopt = { "menuone", "noinsert", "noselect" }
 vim.o.foldenable = true
+vim.o.formatoptions = "cqj"
 vim.opt.textwidth = 120
 vim.opt.cmdheight = 0
 vim.opt.swapfile = false -- creates a swapfile
