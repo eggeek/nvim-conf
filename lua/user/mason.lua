@@ -9,14 +9,7 @@ local M = {
 		"nvim-lua/plenary.nvim",
 		{
 			'mrcjkb/rustaceanvim',
-			version = '^5', -- Recommended
-			config = function()
-				vim.g.rustaceanvim = {
-					server = {
-						on_attach = require("user/lspconfig").on_attach,
-					}
-				}
-			end,
+			version = '^6', -- Recommended
 			lazy = false, -- This plugin is already lazy
 		},
 		{
@@ -33,8 +26,6 @@ M.servers = {
 	"lua_ls",
 	-- "cssls",
 	-- "html",
-	-- "tsserver",
-	-- "astro",
 	"pyright",
 	"ruff",
 	-- "pylyzer",
@@ -45,7 +36,6 @@ M.servers = {
 	"clangd",
 	-- "jdtls",
 	"rust_analyzer", -- using rustaceanvim
-	-- "marksman",
 	-- "tailwindcss",
 	"tinymist",
 	"cmake",
@@ -67,7 +57,8 @@ function M.config()
 		},
 	}
 	require("mason-lspconfig").setup {
-		ensure_installed = M.servers
+		ensure_installed = M.servers,
+    automatic_enable = false
 	}
 end
 

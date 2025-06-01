@@ -32,6 +32,7 @@ function M.config()
         "toggleterm",
         "dressingselect",
         "telescopeprompt",
+				"csv"
       },
       -- filetypes_allowlist: filetypes to illuminate, this is overridden by filetypes_denylist
       filetypes_allowlist = {},

@@ -137,5 +137,5 @@ function! Vim_NeatGuiTabTip()
 endfunc
 
 set tabline=%!Vim_NeatTabLine()
-set guitablabel=%{Vim_NeatGuiTabLabel()}
-set guitabtooltip=%{Vim_NeatGuiTabTip()}
+" set guitablabel=%{Vim_NeatGuiTabLabel()}
+" set guitabtooltip=%{Vim_NeatGuiTabTip()}
