@@ -40,14 +40,15 @@ spec "user.fzf"
 
 -- editing
 spec "user.cmp"
-spec "user.autopairs"
+-- spec "user.autopairs"
 spec "user.comment"
 
 -- enhancement
 spec "user.nvim-tmux"
 spec "user.notify"
 spec "user.term"
-spec "user.surround"
+spec "user.mini"
+-- spec "user.surround"
 -- note taking
 spec "user.notetaking"
 -- misc
