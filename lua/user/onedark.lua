@@ -5,7 +5,7 @@ local M = {
 
 function M.config()
   require 'onedark'.setup {
-    transparent = false,
+    transparent = true,
     style = 'cool',
     -- toggle theme style ---
     toggle_style_key = "<leader>ts",

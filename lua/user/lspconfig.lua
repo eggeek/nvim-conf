@@ -4,21 +4,30 @@ local M = {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
-			"folke/neodev.nvim",
 			"mason-lspconfig.nvim",
 			"ray-x/lsp_signature.nvim",
+			{
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						-- See the configuration section for more details
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			}
 		},
 	},
 }
 
 local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true, buffer = bufnr}
+	local opts = { noremap = true, silent = true, buffer = bufnr }
 	local keymap = vim.keymap.set
 	keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	keymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	-- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+	-- keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	keymap('n', 'K', function()
 		vim.lsp.buf.hover({ border = "rounded" })
 	end, opts)
@@ -114,16 +123,10 @@ function M.config()
 		if require "user/utils".table_contains(skip_servers, server) then
 			goto continue
 		end
-		local opts = { }
+		local opts = {}
 		local require_ok, settings = pcall(require, "user.lspsettings." .. server)
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", settings, opts)
-		end
-
-		if server == "lua_ls" then
-			require("neodev").setup {
-				library = { plugins = { "nvim-dap-ui" }, types = true },
-			}
 		end
 		vim.lsp.config(server, {
 			settings = { [server] = opts }

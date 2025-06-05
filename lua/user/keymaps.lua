@@ -123,7 +123,7 @@ local defaults = {
 		["<leader>z"]  = "<cmd>ColorizerToggle<cr>",
 
 		-- Lsp
-		["<leader>lf"] = "<cmd>lua vim.lsp.buf.format({timeout_ms = 1000000})<cr>",
+		["<leader>lf"] = "<cmd>lua vim.lsp.buf.format()<cr>",
 		["<leader>ca"] = "<cmd>lua vim.lsp.buf.code_action()<cr>",
 	},
 

@@ -1,6 +1,6 @@
 LAZY_PLUGIN_SPEC = {}
 
-function spec(item)
+function Spec(item)
   table.insert(LAZY_PLUGIN_SPEC, { import = item })
 end
 
@@ -16,43 +16,43 @@ end
 require 'user.options'
 require 'user.keymaps'.load_defaults()
 -- ui
-spec 'user.onedark'
-spec 'user.devicons'
-spec "user.treesitter"
-spec "user.lualine"
-spec "user.gitsigns"
-spec "user.indentline"
+Spec 'user.onedark'
+Spec 'user.devicons'
+Spec "user.treesitter"
+Spec "user.lualine"
+Spec "user.gitsigns"
+Spec "user.indentline"
 
 -- lsp
-spec "user.mason"
-spec "user.lspconfig"
+Spec "user.mason"
+Spec "user.lspconfig"
 -- spec "user.linter"
 -- spec "user.schemastore"
-spec "user.navic"
-spec "user.illuminate"
-spec "user.debugger"
+Spec "user.navic"
+Spec "user.illuminate"
+Spec "user.debugger"
 
 -- search
-spec "user.telescope"
-spec "user.project"
-spec "user.bqf"
-spec "user.fzf"
+Spec "user.telescope"
+Spec "user.project"
+Spec "user.bqf"
+Spec "user.fzf"
 
 -- editing
-spec "user.cmp"
+Spec "user.cmp"
 -- spec "user.autopairs"
-spec "user.comment"
+Spec "user.comment"
 
 -- enhancement
-spec "user.nvim-tmux"
-spec "user.notify"
-spec "user.term"
-spec "user.mini"
+Spec "user.nvim-tmux"
+Spec "user.notify"
+Spec "user.term"
+Spec "user.mini"
 -- spec "user.surround"
 -- note taking
-spec "user.notetaking"
+Spec "user.notetaking"
 -- misc
-spec "user.misc"
+Spec "user.misc"
 
 require "user.lazy"
 
