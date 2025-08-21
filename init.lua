@@ -46,7 +46,6 @@ Spec "user.comment"
 -- enhancement
 Spec "user.nvim-tmux"
 Spec "user.notify"
-Spec "user.term"
 Spec "user.mini"
 -- spec "user.surround"
 -- note taking
