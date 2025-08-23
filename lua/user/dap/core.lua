@@ -105,17 +105,8 @@ function M.common_dap_keymap()
 	vim.keymap.set('n', '<M-b>', dap.toggle_breakpoint)
 	vim.keymap.set('n', '<M-B>', function() dap.set_breakpoint(vim.fn.input("Condition: "), vim.fn.input("Num: "), nil) end)
 	vim.keymap.set('n', '<leader>dd', function()
-		M.common_dap_conf()
 		dap.continue()
 	end)
-end
-
-function M.common_dap_conf()
-	-- require 'dap.ext.vscode'.load_launchjs(vim.fn.getcwd() .. '/.launch.json', { cppdbg = { 'c', 'cpp' } })
-	require 'dap.ext.vscode'.load_launchjs(vim.fn.getcwd() .. '/.launch.json', {
-		codelldb = { 'c', 'cpp', 'rust'},
-		cppdbg = { 'c', 'cpp', 'rust' }
-	})
 end
 
 M.setup = function()

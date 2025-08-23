@@ -40,7 +40,8 @@ M.servers = {
 	"tinymist",
 	"cmake",
 	"julials",
-	"ts_ls"
+	"ts_ls",
+	"taplo"
 }
 
 -- M.linters = {
