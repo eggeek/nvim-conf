@@ -107,7 +107,7 @@ local defaults = {
 		["<leader>sr"] = "<cmd>Telescope resume<cr>",
 		["<leader>mp"] = "<cmd>Telescope keymaps<cr>",
 		["<M-x>"]      = "<cmd>Telescope commands<cr>",
-		["<M-o>"]      = "<cmd>Telescope lsp_document_symbols symbols=module,function,method,class<cr>",
+		["<M-o>"]      = "<cmd>Telescope lsp_document_symbols<cr>",
 
 		["<C-s>"]      = "<cmd>w<cr>",
 		["<leader>1"]  = "1gt",
