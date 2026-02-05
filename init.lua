@@ -40,6 +40,7 @@ Spec "user.fzf"
 
 -- editing
 Spec "user.cmp"
+Spec "user.ai"
 -- spec "user.autopairs"
 Spec "user.comment"
 

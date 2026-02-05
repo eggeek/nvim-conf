@@ -18,6 +18,7 @@ vim.opt.splitbelow = true -- force all horizontal splits to go below current win
 vim.opt.splitright = true -- force all vertical splits to go to the right of current window
 vim.opt.pumblend = 0
 vim.opt.pumheight = 10
+vim.o.winborder = 'rounded'
 
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
