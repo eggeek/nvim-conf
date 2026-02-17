@@ -1,16 +1,16 @@
 LAZY_PLUGIN_SPEC = {}
 
 function Spec(item)
-  table.insert(LAZY_PLUGIN_SPEC, { import = item })
+	table.insert(LAZY_PLUGIN_SPEC, { import = item })
 end
 
 function LoadVim(fname)
-  local cmd = 'source' .. vim.fn.stdpath('config') .. '/' .. fname
-  vim.cmd(cmd)
+	local cmd = 'source' .. vim.fn.stdpath('config') .. '/' .. fname
+	vim.cmd(cmd)
 end
 
 if vim.g.neovide then
-  require 'user.neovide-opt'
+	require 'user.neovide-opt'
 end
 
 require 'user.options'
@@ -41,8 +41,11 @@ Spec "user.fzf"
 -- editing
 Spec "user.cmp"
 Spec "user.ai"
+Spec "user.avante"
+-- Spec "user.ipynb"
 -- spec "user.autopairs"
 Spec "user.comment"
+Spec "user.formatter"
 
 -- enhancement
 Spec "user.nvim-tmux"

@@ -53,27 +53,28 @@ local defaults = {
 	normal_mode = {
 
 		-- Fzf
-		["z="]        = "<cmd>call FzfSpell()<cr>",
+		["z="] = "<cmd>call FzfSpell()<cr>",
+		["<leader>gf"] = "<cmd>GFiles<cr>",
 
 		-- Resize with arrows
-		["<C-Up>"]    = "<cmd>resize -2<CR>",
-		["<C-Down>"]  = "<cmd>resize +2<CR>",
-		["<C-Left>"]  = "<cmd>vertical resize -2<CR>",
+		["<C-Up>"] = "<cmd>resize -2<CR>",
+		["<C-Down>"] = "<cmd>resize +2<CR>",
+		["<C-Left>"] = "<cmd>vertical resize -2<CR>",
 		["<C-Right>"] = "<cmd>vertical resize +2<CR>",
 
 		-- QuickFix
-		["]q"]        = "<cmd>cnext<CR>",
-		["[q"]        = "<cmd>cprev<CR>",
-		["[c"]        = function()
+		["]q"] = "<cmd>cnext<CR>",
+		["[q"] = "<cmd>cprev<CR>",
+		["[c"] = function()
 			require("treesitter-context").go_to_context(vim.v.count1)
-			vim.cmd('normal! zz')
+			vim.cmd("normal! zz")
 		end,
 		{ silent = true },
 
 		-- Diagnostic
-		["[d"]         = "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-		["]d"]         = "<cmd>lua vim.diagnostic.goto_next()<cr>",
-		["<leader>q"]  = "<cmd>lua vim.diagnostic.setloclist()<cr>",
+		["[d"] = "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+		["]d"] = "<cmd>lua vim.diagnostic.goto_next()<cr>",
+		["<leader>q"] = "<cmd>lua vim.diagnostic.setloclist()<cr>",
 		["<leader>df"] = "<cmd>lua vim.diagnostic.open_float()<cr>",
 		["<leader>dl"] = function()
 			local current_value = vim.diagnostic.config().virtual_text
@@ -85,45 +86,45 @@ local defaults = {
 		end,
 
 		-- nohl
-		["<M-l>"]      = "<cmd>nohlsearch<Bar>diffupdate<Bar>echo <CR>",
+		["<M-l>"] = "<cmd>nohlsearch<Bar>diffupdate<Bar>echo <CR>",
 
 		-- Horizontal scroll
-		["<M-e>"]      = "zh",
-		["<M-y>"]      = "zl",
+		["<M-e>"] = "zh",
+		["<M-y>"] = "zl",
 
 		-- Keey centered
-		["n"]          = "nzzzv",
-		["N"]          = "Nzzzv",
-		["j"]          = "gj",
-		["k"]          = "gk",
-		["J"]          = "mzJ`z",
+		["n"] = "nzzzv",
+		["N"] = "Nzzzv",
+		["j"] = "gj",
+		["k"] = "gk",
+		["J"] = "mzJ`z",
 
 		-- Telescope
-		["<C-p>"]      = "<cmd>Telescope find_files previewer=false<cr>",
+		["<C-p>"] = "<cmd>Telescope find_files previewer=false<cr>",
 		["<leader>bf"] = "<cmd>Telescope buffers<cr>",
-		["<leader>/"]  = "<cmd>Telescope grep_string<cr>",
-		["<leader>;"]  = "<cmd>Telescope live_grep<cr>",
+		["<leader>/"] = "<cmd>Telescope grep_string<cr>",
+		["<leader>;"] = "<cmd>Telescope live_grep<cr>",
 		["<leader>sd"] = "<cmd>Telescope diagnostics<cr>",
 		["<leader>sr"] = "<cmd>Telescope resume<cr>",
 		["<leader>mp"] = "<cmd>Telescope keymaps<cr>",
-		["<M-x>"]      = "<cmd>Telescope commands<cr>",
-		["<M-o>"]      = "<cmd>Telescope lsp_document_symbols<cr>",
+		["<M-x>"] = "<cmd>Telescope commands<cr>",
+		["<M-o>"] = "<cmd>Telescope lsp_document_symbols<cr>",
 
-		["<C-s>"]      = "<cmd>w<cr>",
-		["<leader>1"]  = "1gt",
-		["<leader>2"]  = "2gt",
-		["<leader>3"]  = "3gt",
-		["<leader>4"]  = "4gt",
-		["<leader>5"]  = "5gt",
-		["<leader>6"]  = "6gt",
-		["<leader>7"]  = "7gt",
+		["<C-s>"] = "<cmd>w<cr>",
+		["<leader>1"] = "1gt",
+		["<leader>2"] = "2gt",
+		["<leader>3"] = "3gt",
+		["<leader>4"] = "4gt",
+		["<leader>5"] = "5gt",
+		["<leader>6"] = "6gt",
+		["<leader>7"] = "7gt",
 		["<leader>tc"] = "<cmd>tabnew<cr>",
 		["<leader>tp"] = "<cmd>tabprev<cr>",
 		["<leader>tn"] = "<cmd>tabnext<cr>",
-		["<leader>z"]  = "<cmd>ColorizerToggle<cr>",
+		["<leader>z"] = "<cmd>ColorizerToggle<cr>",
 
 		-- Lsp
-		["<leader>lf"] = "<cmd>lua vim.lsp.buf.format()<cr>",
+		-- ["<leader>lf"] = "<cmd>lua vim.lsp.buf.format()<cr>",
 		["<leader>ca"] = "<cmd>lua vim.lsp.buf.code_action()<cr>",
 	},
 
@@ -143,7 +144,6 @@ local defaults = {
 		-- Move current line / block with Alt-j/k ala vscode.
 		["J"] = ":m '>+1<cr>gv=gv",
 		["K"] = ":m '<-2<cr>gv=gv",
-
 	},
 
 	visual_block_mode = {
@@ -166,7 +166,6 @@ local defaults = {
 	},
 }
 
-
 -- Unsets all keybindings defined in keymaps
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.clear(keymaps)
@@ -175,7 +174,9 @@ function M.clear(keymaps)
 		local translated_mode = mode_adapters[mode] and mode_adapters[mode] or mode
 		for key, _ in pairs(mappings) do
 			-- some plugins may override default bindings that the user hasn't manually overriden
-			if default[mode][key] ~= nil or (default[translated_mode] ~= nil and default[translated_mode][key] ~= nil) then
+			if
+				default[mode][key] ~= nil or (default[translated_mode] ~= nil and default[translated_mode][key] ~= nil)
+			then
 				pcall(vim.api.nvim_del_keymap, translated_mode, key)
 			end
 		end
