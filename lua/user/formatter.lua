@@ -9,6 +9,7 @@ local M = {
 			python = { "isort", "black" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			tex = { "latexindent", "tex-fmt" },
+			typst = { "typstyle", lsp_format = "fallback" },
 		},
 	},
 	config = function(_, opts)

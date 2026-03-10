@@ -40,12 +40,15 @@ Spec "user.fzf"
 
 -- editing
 Spec "user.cmp"
-Spec "user.ai"
-Spec "user.avante"
 -- Spec "user.ipynb"
 -- spec "user.autopairs"
 Spec "user.comment"
 Spec "user.formatter"
+
+-- ai
+Spec "user.copilot"
+Spec "user.opencode"
+-- Spec "user.avante"
 
 -- enhancement
 Spec "user.nvim-tmux"
