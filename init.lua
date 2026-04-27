@@ -47,7 +47,7 @@ Spec "user.formatter"
 
 -- ai
 Spec "user.copilot"
-Spec "user.opencode"
+-- Spec "user.opencode"
 -- Spec "user.avante"
 
 -- enhancement

@@ -1,3 +1,4 @@
+vim.g.markdown_recommended_style = 0
 vim.g.completeopt = { "menuone", "noinsert", "noselect" }
 vim.o.foldenable = true
 vim.o.formatoptions = "cqj"

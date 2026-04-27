@@ -15,15 +15,17 @@ M.config = function()
 			accept = false,
 		},
 		panel = {
-			enabled = false
+			enabled = false,
 		},
 		filetypes = {
 			python = true,
 			lua = true,
 			typst = true,
 			tex = true,
-			["*"] = false
-		}
+			rust = true,
+			cpp = true,
+			["*"] = false,
+		},
 	})
 end
 
