@@ -13,9 +13,11 @@ local M = {
 			json = { "deno_fmt", lsp_format = "fallback" },
 			javascript = { "dprint", lsp_format = "fallback" },
 			typescript = { "dprint", lsp_format = "fallback" },
+			cpp = { "clang_format", lsp_format = "fallback" },
 			javascriptreact = { "dprint", lsp_format = "fallback" },
 			typescriptreact = { "dprint", lsp_format = "fallback" },
-			["*"] = { "trim_whitespace", "trim_newlines", "typos" },
+			toml = { "taplo", lsp_format = "fallback" },
+			["*"] = { "trim_whitespace", "trim_newlines" },
 		},
 	},
 	config = function(_, opts)
