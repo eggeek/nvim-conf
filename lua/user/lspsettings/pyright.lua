@@ -4,7 +4,7 @@ return {
       disableOrganizeImports = true,   -- Using Ruff
     },
     python = {
-			pythonPath = vim.fn.exepath("python"),
+      -- pythonPath = vim.fn.exepath("python"),
       analysis = {
         -- ignore = { '*' }, -- Using Ruff
         -- autoSearchPaths = true,

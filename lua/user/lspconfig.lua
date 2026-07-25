@@ -47,10 +47,19 @@ M.on_attach = function(client, bufnr)
 	end
 end
 
+local function disable_dynamic_file_watchers(capabilities)
+	capabilities.workspace = capabilities.workspace or {}
+	capabilities.workspace.didChangeWatchedFiles =
+		vim.tbl_deep_extend("force", capabilities.workspace.didChangeWatchedFiles or {}, {
+			dynamicRegistration = false,
+		})
+	return capabilities
+end
+
 function M.common_capabilities()
 	local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 	if status_ok then
-		return cmp_nvim_lsp.default_capabilities()
+		return disable_dynamic_file_watchers(cmp_nvim_lsp.default_capabilities())
 	end
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -63,7 +72,7 @@ function M.common_capabilities()
 		},
 	}
 
-	return capabilities
+	return disable_dynamic_file_watchers(capabilities)
 end
 
 function M.config()
@@ -128,9 +137,7 @@ function M.config()
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", settings, opts)
 		end
-		vim.lsp.config(server, {
-			settings = { [server] = opts }
-		})
+		vim.lsp.config(server, opts)
 		vim.lsp.enable(server, true)
 		::continue::
 	end
