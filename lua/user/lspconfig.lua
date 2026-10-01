@@ -51,7 +51,13 @@ local function disable_dynamic_file_watchers(capabilities)
 	return capabilities
 end
 
+-- Completion capabilities come from whichever completion plugin is enabled in init.lua
 function M.common_capabilities()
+	local blink_ok, blink = pcall(require, "blink.cmp")
+	if blink_ok then
+		return disable_dynamic_file_watchers(blink.get_lsp_capabilities())
+	end
+
 	local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 	if status_ok then
 		return disable_dynamic_file_watchers(cmp_nvim_lsp.default_capabilities())

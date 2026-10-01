@@ -39,7 +39,8 @@ Spec "user.bqf"
 Spec "user.fzf"
 
 -- editing
-Spec "user.cmp"
+Spec "user.blink"
+-- Spec "user.cmp" -- previous completion setup (nvim-cmp); swap with the line above to go back
 -- Spec "user.ipynb"
 -- spec "user.autopairs"
 Spec "user.formatter"
@@ -65,7 +66,6 @@ LoadVim 'vim/tabline.vim'
 LoadVim 'vim/fzf.vim'
 LoadVim 'vim/emacs-move.vim'
 LoadVim 'vim/vimtex.vim'
-LoadVim 'vim/custom_highlight.vim'
 
 -- after/plugin/dap.lua
 -- after/plugin/autocmds.lua

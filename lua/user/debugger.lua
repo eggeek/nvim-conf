@@ -5,7 +5,7 @@ end
 
 return {
   "mfussenegger/nvim-dap",
-  dependencies = { "rcarriga/nvim-dap-ui", "nvim-neotest/nvim-nio", "rcarriga/cmp-dap" },
+  dependencies = { "rcarriga/nvim-dap-ui", "nvim-neotest/nvim-nio" },
   keys = {
     { "<M-b>", dap "toggle_breakpoint", desc = "Toggle breakpoint" },
     {
