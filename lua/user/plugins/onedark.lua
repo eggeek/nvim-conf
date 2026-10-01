@@ -1,6 +1,7 @@
 return {
   "navarasu/onedark.nvim",
-  lazy = false, -- main colorscheme: load during startup
+  lazy = false, -- main colorscheme: load during startup, before other plugins
+  priority = 1000,
   config = function()
     require("onedark").setup {
       transparent = true,

@@ -1,5 +1,5 @@
--- Completion: blink.cmp, configured to behave like the previous nvim-cmp setup (user.cmp / user.cmp-core).
--- To switch back, swap `Spec "user.blink"` for `Spec "user.cmp"` in init.lua.
+-- Completion: blink.cmp, configured to behave like the previous nvim-cmp setup (cmp.lua + user/cmp-core.lua).
+-- To switch back: in init.lua, disable "blink" and enable "cmp".
 
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))

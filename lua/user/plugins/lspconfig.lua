@@ -79,7 +79,7 @@ end
 function M.config()
 	local icons = require("user.icons")
 
-	local servers = require("user.mason").servers
+	local servers = require("user.plugins.mason").servers
 
 	local S = vim.diagnostic.severity
 	local default_diagnostic_config = {

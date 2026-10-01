@@ -1,4 +1,4 @@
--- Bootstrap lazy.nvim (from the lazy.nvim install docs)
+-- Bootstrap lazy.nvim (from the lazy.nvim install docs); plugins are set up in init.lua
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   local out = vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", "https://github.com/folke/lazy.nvim.git", lazypath }
@@ -14,12 +14,3 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup {
-  spec = LAZY_PLUGIN_SPEC,
-  ui = {
-    border = "rounded",
-  },
-  change_detection = {
-    notify = false,
-  },
-}

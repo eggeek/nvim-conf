@@ -1,71 +1,67 @@
-LAZY_PLUGIN_SPEC = {}
-
-function Spec(item)
-	table.insert(LAZY_PLUGIN_SPEC, { import = item })
-end
-
-function LoadVim(fname)
-	local cmd = 'source' .. vim.fn.stdpath('config') .. '/' .. fname
-	vim.cmd(cmd)
-end
-
 if vim.g.neovide then
-	require 'user.neovide-opt'
+	require "user.neovide-opt"
 end
 
-require 'user.options'
-require 'user.keymaps'
--- ui
-Spec 'user.onedark'
-Spec 'user.devicons'
-Spec "user.treesitter"
-Spec "user.lualine"
-Spec "user.gitsigns"
-Spec "user.indentline"
+require "user.options"
+require "user.keymaps"
+require "user.lazy" -- bootstrap lazy.nvim
 
--- lsp
-Spec "user.mason"
-Spec "user.lspconfig"
--- spec "user.linter"
--- spec "user.schemastore"
-Spec "user.navic"
-Spec "user.illuminate"
-Spec "user.debugger"
+-- Plugin list: each entry loads lua/user/plugins/<name>.lua (gf on the name opens it).
+-- Turn one off with `enabled = false`.
+-- (Order here doesn't affect load order; use `priority`/`dependencies` in a spec for that.)
 
--- search
-Spec "user.telescope"
-Spec "user.project"
-Spec "user.bqf"
-Spec "user.fzf"
+require("lazy").setup {
+	spec = {
+		-- ui
+		{ import = "user.plugins.onedark" },
+		{ import = "user.plugins.devicons" },
+		{ import = "user.plugins.treesitter" },
+		{ import = "user.plugins.lualine" },
+		{ import = "user.plugins.gitsigns" },
+		{ import = "user.plugins.indentline" },
 
--- editing
-Spec "user.blink"
--- Spec "user.cmp" -- previous completion setup (nvim-cmp); swap with the line above to go back
--- Spec "user.ipynb"
--- spec "user.autopairs"
-Spec "user.formatter"
+		-- lsp
+		{ import = "user.plugins.mason" },
+		{ import = "user.plugins.lspconfig" },
+		{ import = "user.plugins.linter", enabled = false },
+		{ import = "user.plugins.navic" },
+		{ import = "user.plugins.illuminate" },
+		{ import = "user.plugins.debugger" },
 
--- ai
-Spec "user.copilot"
--- Spec "user.opencode"
--- Spec "user.avante"
+		-- search
+		{ import = "user.plugins.telescope" },
+		{ import = "user.plugins.project" },
+		{ import = "user.plugins.bqf" },
+		{ import = "user.plugins.fzf" },
 
--- enhancement
-Spec "user.nvim-tmux"
-Spec "user.notify"
-Spec "user.mini"
--- spec "user.surround"
--- note taking
-Spec "user.notetaking"
--- misc
-Spec "user.misc"
+		-- editing
+		{ import = "user.plugins.blink" },
+		{ import = "user.plugins.cmp", enabled = false }, -- previous completion setup (nvim-cmp)
+		{ import = "user.plugins.autopairs", enabled = false },
+		{ import = "user.plugins.formatter" },
 
-require "user.lazy"
+		-- ai
+		{ import = "user.plugins.copilot" },
+		{ import = "user.plugins.opencode", enabled = false },
+		{ import = "user.plugins.avante", enabled = false },
 
-LoadVim 'vim/tabline.vim'
-LoadVim 'vim/fzf.vim'
-LoadVim 'vim/emacs-move.vim'
-LoadVim 'vim/vimtex.vim'
+		-- enhancement
+		{ import = "user.plugins.nvim-tmux" },
+		{ import = "user.plugins.notify" },
+		{ import = "user.plugins.mini" },
+		{ import = "user.plugins.surround", enabled = false },
 
--- after/plugin/dap.lua
--- after/plugin/autocmds.lua
+		-- note taking
+		{ import = "user.plugins.notetaking" },
+
+		-- misc
+		{ import = "user.plugins.misc" },
+	},
+	ui = { border = "rounded" },
+	change_detection = { notify = false },
+}
+
+-- Also loaded automatically:
+--   plugin/*.vim           Vimscript settings (tabline, fzf, emacs-style cmdline keys, vimtex)
+--   after/plugin/*.lua     autocmds
+--   after/lsp/*.lua        per-server LSP settings
