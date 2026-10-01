@@ -113,6 +113,10 @@ local defaults = {
 		["<leader>tn"] = "<cmd>tabnext<cr>",
 		["<leader>z"] = "<cmd>ColorizerToggle<cr>",
 
+		-- Toggle comment with built-in gcc (<C-/> arrives as <C-_> in terminals)
+		["<C-/>"] = { "gcc", { remap = true } },
+		["<C-_>"] = { "gcc", { remap = true } },
+
 		-- Lsp
 		-- ["<leader>lf"] = "<cmd>lua vim.lsp.buf.format()<cr>",
 		["<leader>ca"] = "<cmd>lua vim.lsp.buf.code_action()<cr>",
@@ -140,6 +144,10 @@ local defaults = {
 		-- Move current line / block with Alt-j/k ala vscode.
 		["J"] = ":m '>+1<CR>gv-gv",
 		["K"] = ":m '<-2<CR>gv-gv",
+
+		-- Toggle comment with built-in gc (<C-/> arrives as <C-_> in terminals)
+		["<C-/>"] = { "gc", { remap = true } },
+		["<C-_>"] = { "gc", { remap = true } },
 	},
 
 	command_mode = {

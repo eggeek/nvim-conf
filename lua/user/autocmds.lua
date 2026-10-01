@@ -57,20 +57,7 @@ local defs = {
     "FileType",
     {
       group = "_buffer_mappings",
-      pattern = {
-        "qf",
-        "help",
-        "man",
-        "floaterm",
-        "lspinfo",
-        "lir",
-        "lsp-installer",
-        "null-ls-info",
-        "tsplayground",
-        "DressingSelect",
-        "Jaq",
-        "dap-float"
-      },
+      pattern = { "qf", "help", "man", "dap-float" },
       callback = function()
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
         vim.opt_local.buflisted = false
@@ -100,13 +87,11 @@ local defs = {
     "BufReadPost",
     {
       group = "_cursor_loc",
-      pattern = "*",
-      callback = function()
-        vim.cmd [[
-          if line("'\"") > 1 && line("'\"") <= line("$") |
-          \	 exe "normal! g`\"" |
-          \ endif
-        ]]
+      callback = function(args)
+        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+        if mark[1] > 1 and mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
+          vim.api.nvim_win_set_cursor(0, mark)
+        end
       end
     }
   },

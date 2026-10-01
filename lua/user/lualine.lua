@@ -30,7 +30,17 @@ function M.config()
           color_correction = 'dynamic',
           navic_opts = components.navic_opts,
           padding = { left = 1, right = 0 }
-        }
+        },
+        { -- LSP signature while typing arguments (lsp_signature, see lspconfig.lua)
+          function()
+            local sig = require("lsp_signature").status_line(math.floor(vim.o.columns / 2))
+            local text = sig.hint ~= "" and (sig.label .. "  [" .. sig.hint .. "]") or sig.label
+            return (text:gsub("%%", "%%%%")) -- % is special in statuslines
+          end,
+          cond = function()
+            return package.loaded.lsp_signature ~= nil and vim.fn.mode():sub(1, 1) == "i"
+          end,
+        },
       },
       lualine_x = {
         components.diagnostics,

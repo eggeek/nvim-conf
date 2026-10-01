@@ -42,7 +42,6 @@ Spec "user.fzf"
 Spec "user.cmp"
 -- Spec "user.ipynb"
 -- spec "user.autopairs"
-Spec "user.comment"
 Spec "user.formatter"
 
 -- ai

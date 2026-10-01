@@ -16,34 +16,33 @@ local M = {
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 					},
 				},
-			}
+			},
 		},
 	},
 }
 
+-- Built-in LSP keys already cover K (hover), grr/gri/grn/gra/grt and gO.
+-- These add the ones Neovim has no default for.
 local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true, buffer = bufnr }
-	local keymap = vim.keymap.set
-	keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	keymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	-- keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	keymap('n', 'K', function()
-		vim.lsp.buf.hover({ border = "rounded" })
-	end, opts)
+	local opts = { buffer = bufnr }
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
 end
 
 M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
-	require "lsp_signature".on_attach({
+	-- No automatic window or hint: the signature shows in the statusline (lualine.lua).
+	-- Insert mode: <M-x> toggles the signature window, <M-n> cycles overloads.
+	require("lsp_signature").on_attach({
 		floating_window = false,
-		hint_enable = false,          -- virtual hint enable
+		hint_enable = false,
 		doc_line = 0,
-		toggle_key = '<M-x>',         -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
-		select_signature_key = '<M-n>', -- cycle to next signature, e.g. '<M-n>' function overloading
-	}, bufnr)                       -- Note: add in lsp client on-attach
+		toggle_key = "<M-x>",
+		select_signature_key = "<M-n>",
+	}, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
-		require 'nvim-navic'.attach(client, bufnr)
+		require("nvim-navic").attach(client, bufnr)
 	end
 end
 
@@ -76,24 +75,24 @@ function M.common_capabilities()
 end
 
 function M.config()
-	local icons = require "user.icons"
+	local icons = require("user.icons")
 
-	local servers = require "user.mason".servers
+	local servers = require("user.mason").servers
 
 	local S = vim.diagnostic.severity
 	local default_diagnostic_config = {
 		signs = {
 			text = {
 				[S.ERROR] = icons.diagnostics.Error,
-				[S.WARN]  = icons.diagnostics.Warning,
-				[S.HINT]  = icons.diagnostics.Hint,
-				[S.INFO]  = icons.diagnostics.Information,
+				[S.WARN] = icons.diagnostics.Warning,
+				[S.HINT] = icons.diagnostics.Hint,
+				[S.INFO] = icons.diagnostics.Information,
 			},
 			numhl = {
 				[S.ERROR] = "DiagnosticSignError",
-				[S.WARN]  = "DiagnosticSignWarn",
-				[S.HINT]  = "DiagnosticSignHint",
-				[S.INFO]  = "DiagnosticSignInfo",
+				[S.WARN] = "DiagnosticSignWarn",
+				[S.HINT] = "DiagnosticSignHint",
+				[S.INFO] = "DiagnosticSignInfo",
 			},
 		},
 		-- built-in [d ]d [D ]D open the float after jumping
@@ -109,7 +108,6 @@ function M.config()
 		float = {
 			focusable = true,
 			style = "minimal",
-			border = "rounded",
 			source = true,
 			header = "",
 			prefix = "",
@@ -118,37 +116,22 @@ function M.config()
 
 	vim.diagnostic.config(default_diagnostic_config)
 
-	-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-	-- require("lspconfig.ui.windows").default_options.border = "rounded"
-
-	vim.api.nvim_create_autocmd('LspAttach', {
-		group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 		callback = function(ev)
 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
 			M.on_attach(client, ev.buf)
-		end
+		end,
 	})
-	vim.lsp.config('*', {
-		capabilities = M.common_capabilities()
+	vim.lsp.config("*", {
+		capabilities = M.common_capabilities(),
 	})
 
-	-- not to config the following servers in lspconfig
-	local skip_servers = {
-		"rust_analyzer"
-	}
-	for _, server in pairs(servers) do
-		if require "user/utils".table_contains(skip_servers, server) then
-			goto continue
-		end
-		local opts = {}
-		local require_ok, settings = pcall(require, "user.lspsettings." .. server)
-		if require_ok then
-			opts = vim.tbl_deep_extend("force", settings, opts)
-		end
-		vim.lsp.config(server, opts)
-		vim.lsp.enable(server, true)
-		::continue::
-	end
+	-- Per-server settings live in after/lsp/<server>.lua (merged automatically).
+	-- rust_analyzer is installed by mason but started by rustaceanvim.
+	vim.lsp.enable(vim.tbl_filter(function(s)
+		return s ~= "rust_analyzer"
+	end, servers))
 end
 
 return M
