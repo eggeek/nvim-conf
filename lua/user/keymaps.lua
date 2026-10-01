@@ -72,6 +72,15 @@ map("v", ">", ">gv", s)
 map("v", "J", ":m '>+1<cr>gv=gv", s)
 map("v", "K", ":m '<-2<cr>gv=gv", s)
 
--- Command line: <C-j>/<C-k> move in the completion menu when it's open
-map("c", "<C-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true })
-map("c", "<C-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true })
+-- Command line: <C-j>/<C-k> move in the completion menu when it's open;
+-- otherwise <C-k> deletes to end of line (emacs style; other emacs keys are in plugin/emacs-move.vim)
+map("c", "<C-j>", function()
+	return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-j>"
+end, { expr = true })
+map("c", "<C-k>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-p>"
+	end
+	vim.fn.setcmdline(vim.fn.getcmdline():sub(1, vim.fn.getcmdpos() - 1))
+	return ""
+end, { expr = true })

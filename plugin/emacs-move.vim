@@ -18,5 +18,4 @@ cnoremap   <C-X><C-A> <C-A>
 cnoremap        <C-B> <Left>
 cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?"":"\<Lt>Right>"
-cnoremap <C-k> <C-\>estrpart(getcmdline(),0,getcmdpos()-1)<CR>
 cnoremap <M-d> <S-Right><C-W>

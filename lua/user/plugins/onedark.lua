@@ -32,6 +32,8 @@ return {
         TelescopeMatching = { fg = "#73C991", fmt = "bold" },
         DapStoppedLine = { bg = "#433d28" },
         LspSignatureActiveParameter = { bg = "$selection" },
+        -- signature text in the statusline (lualine.lua); bg "none" = statusline's own background
+        LualineSignature = { fg = "$yellow", bg = "none", fmt = "none" },
 
         -- completion menu: nvim-cmp groups and their blink.cmp equivalents
         CmpItemAbbr = { fg = "$cmp_abbr" },

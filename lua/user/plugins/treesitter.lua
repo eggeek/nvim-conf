@@ -13,7 +13,7 @@ local M = {
           function()
             require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
           end,
-          mode = { "n", "x", "o" },
+          mode = { "n", "x" }, -- not "o": with an operator the jump includes the cursor character
           desc = "Function start",
         },
         {
@@ -21,7 +21,7 @@ local M = {
           function()
             require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
           end,
-          mode = { "n", "x", "o" },
+          mode = { "n", "x" }, -- not "o": with an operator the jump includes the cursor character
           desc = "Function end",
         },
       },
