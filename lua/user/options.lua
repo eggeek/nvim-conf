@@ -63,8 +63,4 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.lsp.set_log_level("off")
-
--- set python provider
-vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
-vim.g.python_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python")
+vim.lsp.log.set_level("off")
