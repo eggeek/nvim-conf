@@ -4,7 +4,6 @@ local M = {
 		{
 			"williamboman/mason.nvim",
 			event = "User FileOpened",
-			lazy = true,
 		},
 		"nvim-lua/plenary.nvim",
 		{
@@ -18,7 +17,6 @@ local M = {
 			opts = {},
 		}
 	},
-	lazy = true,
 	event = "User FileOpened",
 }
 
@@ -44,13 +42,6 @@ M.servers = {
 	"ts_ls",
 	"taplo"
 }
-
--- M.linters = {
---   -- "mypy",
--- }
---
--- M.installed_list = require "user.utils".merge_tbls(
---   M.servers, M.linters)
 
 function M.config()
 	require("mason").setup {

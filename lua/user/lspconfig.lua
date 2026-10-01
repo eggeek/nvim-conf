@@ -1,20 +1,16 @@
 local M = {
 	"neovim/nvim-lspconfig",
-	lazy = true,
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
+		"mason-lspconfig.nvim",
+		"ray-x/lsp_signature.nvim",
 		{
-			"mason-lspconfig.nvim",
-			"ray-x/lsp_signature.nvim",
-			{
-				"folke/lazydev.nvim",
-				ft = "lua", -- only load on lua files
-				opts = {
-					library = {
-						-- See the configuration section for more details
-						-- Load luvit types when the `vim.uv` word is found
-						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-					},
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				},
 			},
 		},

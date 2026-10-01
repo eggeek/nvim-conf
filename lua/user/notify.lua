@@ -1,14 +1,9 @@
-local M = {
-  'rcarriga/nvim-notify',
+return {
+  "rcarriga/nvim-notify",
   event = "VeryLazy",
+  opts = {
+    background_colour = "#323641",
+    timeout = 1000,
+    stages = "fade",
+  },
 }
-
-function M.config()
-    require("notify").setup({
-      background_colour = "#323641",
-      timeout = 1000,
-      stages = "fade",
-    })
-end
-
-return M

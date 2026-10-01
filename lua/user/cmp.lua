@@ -18,11 +18,7 @@ function M.config()
 	-- require "user.cmp-core".config()
 	require("user.cmp-core").setup()
 
-	-- config LunaSnip
-	-- local utils = require "user.utils"
-	-- local paths = {}
-	-- local datdir = vim.fn.stdpath("data")
-	-- paths[#paths + 1] = utils.join_paths(datdir, "site", "pack", "lazy", "opt", "friendly-snippets")
+	-- config LuaSnip
 	require("luasnip").setup({
 		region_check_events = "CursorMoved", -- exit session when cursor leaves the snippet region
 		delete_check_events = "TextChanged", -- drop nodes whose text was deleted

@@ -1,25 +1,18 @@
-local M = {
+return {
   "ahmedkhalf/project.nvim",
   event = "VeryLazy",
-}
-
-function M.config()
-  require("project_nvim").setup {
-    on_config_done = nil,
+  main = "project_nvim",
+  keys = {
+    { "<leader>pj", function() require("telescope").extensions.projects.projects() end, desc = "Projects" },
+  },
+  opts = {
     manual_mode = false,
     detection_methods = { "pattern" },
     patterns = { "!.gitconfig", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
     ignore_lsp = {},
-    exclude_dirs = { },
+    exclude_dirs = {},
     show_hidden = false,
     silent_chdir = true,
     scope_chdir = "global",
-  }
-
-  local opts = { noremap = true, silent = true }
-  local keymap = vim.api.nvim_set_keymap
-
-  keymap("n", "<leader>pj", ":lua require('telescope').extensions.projects.projects()<CR>", opts)
-end
-
-return M
+  },
+}

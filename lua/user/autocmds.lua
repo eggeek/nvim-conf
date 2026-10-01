@@ -98,6 +98,7 @@ local defs = {
   { -- enable spell for text file
     "FileType",
     {
+      group = "_spell",
       pattern = "text,tex,markdown",
       callback = function()
         vim.cmd [[ setlocal spell spelllang=en ]]
@@ -115,4 +116,13 @@ local defs = {
   -- }
 }
 
-require "user.utils".define_autocmds(defs)
+-- Each group is cleared once on creation, so re-sourcing this file doesn't duplicate autocmds
+local cleared = {}
+for _, def in ipairs(defs) do
+  local event, opts = def[1], def[2]
+  if opts.group and not cleared[opts.group] then
+    vim.api.nvim_create_augroup(opts.group, { clear = true })
+    cleared[opts.group] = true
+  end
+  vim.api.nvim_create_autocmd(event, opts)
+end

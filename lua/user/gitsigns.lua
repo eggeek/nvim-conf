@@ -1,18 +1,14 @@
-local M = {
+return {
   "lewis6991/gitsigns.nvim",
   event = "User FileOpened",
   cmd = "Gitsigns",
-}
-M.config = function()
-  -- local icons = require "user.icons"
-
-  require("gitsigns").setup {
+  opts = {
     signs = {
-      add = { text = "+", },
-      change = { text = "~", },
-      delete = { text = "-", },
-      topdelete = { text = "▔", },
-      changedelete = { text = "~", },
+      add = { text = "+" },
+      change = { text = "~" },
+      delete = { text = "-" },
+      topdelete = { text = "▔" },
+      changedelete = { text = "~" },
     },
     watch_gitdir = {
       interval = 1000,
@@ -29,7 +25,5 @@ M.config = function()
       row = 0,
       col = 1,
     },
-  }
-end
-
-return M
+  },
+}

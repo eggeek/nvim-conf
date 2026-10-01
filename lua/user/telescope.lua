@@ -1,27 +1,29 @@
 local M = {
   "nvim-telescope/telescope.nvim",
-  dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
-  lazy = true,
+  dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
   cmd = "Telescope",
+  keys = {
+    { "<C-p>", "<cmd>Telescope find_files previewer=false<cr>", desc = "Find files" },
+    { "<leader>bf", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>/", "<cmd>Telescope grep_string<cr>", desc = "Grep word under cursor" },
+    { "<leader>;", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+    { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume last picker" },
+    { "<leader>mp", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+    { "<M-x>", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<M-o>", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document symbols" },
+  },
 }
 
 function M.config()
   local icons = require "user.icons"
   local actions = require "telescope.actions"
-  local action_layout = require("telescope.actions.layout")
+  local action_layout = require "telescope.actions.layout"
   require("telescope").setup {
     defaults = {
       prompt_prefix = icons.ui.Search .. " : ",
       selection_caret = icons.ui.Forward .. " ",
-      -- entry_prefix = "   ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      -- path_display = { "smart" },
-      color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" },
-      sorting_strategy = nil,
-      layout_strategy = nil,
-      layout_config = {},
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -63,72 +65,25 @@ function M.config()
       },
     },
     pickers = {
-      live_grep = {
-        theme = "dropdown",
-      },
-
-      grep_string = {
-        theme = "dropdown",
-      },
-
-      find_files = {
-        theme = "dropdown",
-        previewer = false,
-      },
-
+      live_grep = { theme = "dropdown" },
+      grep_string = { theme = "dropdown" },
+      find_files = { theme = "dropdown", previewer = false },
       buffers = {
         theme = "dropdown",
         previewer = true,
-        initial_mode = "insert",
         mappings = {
-          i = {
-            ["<C-d>"] = actions.delete_buffer,
-          },
-          n = {
-            ["dd"] = actions.delete_buffer,
-          },
+          i = { ["<C-d>"] = actions.delete_buffer },
+          n = { ["dd"] = actions.delete_buffer },
         },
       },
-
-      planets = {
-        show_pluto = false,
-        show_moon = false,
-      },
-
-      colorscheme = {
-        enable_preview = true,
-      },
-
-      lsp_references = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-
-      lsp_definitions = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-
-      lsp_declarations = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-
-      lsp_implementations = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-    },
-    extensions = {
-      fzf = {
-        fuzzy = true,                   -- false will only do exact matching
-        override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true,    -- override the file sorter
-        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-      },
+      colorscheme = { enable_preview = true },
+      lsp_references = { theme = "dropdown", initial_mode = "normal" },
+      lsp_definitions = { theme = "dropdown", initial_mode = "normal" },
+      lsp_declarations = { theme = "dropdown", initial_mode = "normal" },
+      lsp_implementations = { theme = "dropdown", initial_mode = "normal" },
     },
   }
-  require("telescope").load_extension("fzf")
+  require("telescope").load_extension "fzf"
 end
 
 return M

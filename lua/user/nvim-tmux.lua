@@ -1,15 +1,12 @@
-local M = { 'alexghergh/nvim-tmux-navigation' }
-
-function M.config()
-  require 'nvim-tmux-navigation'.setup {
+return {
+  "alexghergh/nvim-tmux-navigation",
+  opts = {
     keybindings = {
       left = "<C-h>",
       down = "<C-j>",
       up = "<C-k>",
       right = "<C-l>",
-      next = "<M-w>"
-    }
-  }
-end
-
-return M
+      next = "<M-w>",
+    },
+  },
+}

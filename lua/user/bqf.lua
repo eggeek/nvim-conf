@@ -1,10 +1,7 @@
-local M = {
+return {
   "kevinhwang91/nvim-bqf",
   event = "VeryLazy",
-}
-
-function M.config()
-  require("bqf").setup {
+  opts = {
     auto_enable = true,
     magic_window = true,
     auto_resize_height = false,
@@ -32,7 +29,5 @@ function M.config()
       ptoggleauto = "a",
       ptogglemode = "P",
     },
-  }
-end
-
-return M
+  },
+}

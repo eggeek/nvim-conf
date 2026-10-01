@@ -89,16 +89,7 @@ local defaults = {
 		["k"] = "gk",
 		["J"] = "mzJ`z",
 
-		-- Telescope
-		["<C-p>"] = "<cmd>Telescope find_files previewer=false<cr>",
-		["<leader>bf"] = "<cmd>Telescope buffers<cr>",
-		["<leader>/"] = "<cmd>Telescope grep_string<cr>",
-		["<leader>;"] = "<cmd>Telescope live_grep<cr>",
-		["<leader>sd"] = "<cmd>Telescope diagnostics<cr>",
-		["<leader>sr"] = "<cmd>Telescope resume<cr>",
-		["<leader>mp"] = "<cmd>Telescope keymaps<cr>",
-		["<M-x>"] = "<cmd>Telescope commands<cr>",
-		["<M-o>"] = "<cmd>Telescope lsp_document_symbols<cr>",
+		-- Telescope keys live in telescope.lua
 
 		["<C-s>"] = "<cmd>w<cr>",
 		["<leader>1"] = "1gt",

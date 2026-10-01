@@ -49,8 +49,6 @@ M.config = function()
 	local ConfirmBehavior = cmp_types.ConfirmBehavior
 	local SelectBehavior = cmp_types.SelectBehavior
 
-	-- local cmp = require("user.utils").require_on_index "cmp"
-	-- local luasnip = require("user.utils").require_on_index "luasnip"
 	local cmp = require "cmp"
 	local luasnip = require("luasnip")
 	local cmp_window = require "cmp.config.window"
