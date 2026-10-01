@@ -80,14 +80,20 @@ function M.config()
 
 	local servers = require "user.mason".servers
 
+	local S = vim.diagnostic.severity
 	local default_diagnostic_config = {
 		signs = {
-			active = true,
-			values = {
-				{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-				{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-				{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-				{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
+			text = {
+				[S.ERROR] = icons.diagnostics.Error,
+				[S.WARN]  = icons.diagnostics.Warning,
+				[S.HINT]  = icons.diagnostics.Hint,
+				[S.INFO]  = icons.diagnostics.Information,
+			},
+			numhl = {
+				[S.ERROR] = "DiagnosticSignError",
+				[S.WARN]  = "DiagnosticSignWarn",
+				[S.HINT]  = "DiagnosticSignHint",
+				[S.INFO]  = "DiagnosticSignInfo",
 			},
 		},
 		virtual_text = false,
@@ -105,10 +111,6 @@ function M.config()
 	}
 
 	vim.diagnostic.config(default_diagnostic_config)
-
-	for _, sign in ipairs(vim.tbl_get(default_diagnostic_config, "signs", "values") or {}) do
-		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-	end
 
 	-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	-- require("lspconfig.ui.windows").default_options.border = "rounded"
