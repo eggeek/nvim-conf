@@ -62,14 +62,6 @@ local defaults = {
 		["<C-Left>"] = "<cmd>vertical resize -2<CR>",
 		["<C-Right>"] = "<cmd>vertical resize +2<CR>",
 
-		-- QuickFix
-		["]q"] = "<cmd>cnext<CR>",
-		["[q"] = "<cmd>cprev<CR>",
-		["[c"] = function()
-			require("treesitter-context").go_to_context(vim.v.count1)
-			vim.cmd("normal! zz")
-		end,
-		{ silent = true },
 
 		-- Diagnostic
 		["<leader>q"] = "<cmd>lua vim.diagnostic.setloclist()<cr>",

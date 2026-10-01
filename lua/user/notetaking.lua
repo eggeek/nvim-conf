@@ -7,7 +7,7 @@ local M = {
 			vim.fn["mkdp#util#install"]()
 		end,
 		init = function()
-			vim.g.mkdp_markdown_css = "/home/eggeek/Templates/markdown/github-markdown-dark.css"
+			vim.g.mkdp_markdown_css = vim.fn.expand("~/Templates/markdown/github-markdown-dark.css")
 		end,
 	},
 	{

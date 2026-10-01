@@ -13,13 +13,32 @@ local M = {
       opts = {},
     },
     {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "main",
+      keys = {
+        {
+          "[f",
+          function()
+            require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+          end,
+          mode = { "n", "x", "o" },
+          desc = "Function start",
+        },
+        {
+          "]f",
+          function()
+            require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+          end,
+          mode = { "n", "x", "o" },
+          desc = "Function end",
+        },
+      },
+      opts = { move = { set_jumps = true } },
+    },
+    {
       "windwp/nvim-ts-autotag",
       event = "VeryLazy",
       opts = {},
-    },
-    {
-      "windwp/nvim-autopairs",
-      event = "InsertEnter",
     },
   },
 }
