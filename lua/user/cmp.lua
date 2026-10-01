@@ -9,7 +9,6 @@ local M = {
 			"saadparwaiz1/cmp_luasnip",
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
-			"rcarriga/cmp-dap",
 		},
 	},
 	event = "InsertEnter",

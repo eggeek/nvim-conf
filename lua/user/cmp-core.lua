@@ -62,7 +62,9 @@ M.config = function()
 		on_config_done = nil,
 		enabled = function()
 			local buftype = vim.bo[0].buftype
-			if require("cmp_dap").is_dap_buffer() then
+			-- same check as cmp_dap.is_dap_buffer(), without loading nvim-dap
+			local ft = vim.bo[0].filetype
+			if ft == "dap-repl" or vim.startswith(ft, "dapui_") then
 				return true
 			end
 			if buftype == "prompt" then
@@ -137,7 +139,6 @@ M.config = function()
 			-- { name = "nvim_lua" },
 			{ name = "path" },
 			{ name = "buffer",    keyword_length = 3 },
-			{ name = "treesitter" },
 			-- { name = "crates" },
 			-- { name = "tmux" },
 		},

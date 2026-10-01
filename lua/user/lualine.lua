@@ -16,7 +16,13 @@ function M.config()
       disabled_filetypes = { "alpha" },
     },
     sections = {
-      lualine_a = { components.mode },
+      lualine_a = {
+        components.mode,
+        {
+          function() return "DEBUG" end,
+          cond = function() return package.loaded["user.dap.core"] and require("user.dap.core").active() end,
+        },
+      },
       lualine_b = { components.branch },
       lualine_c = {
         {
