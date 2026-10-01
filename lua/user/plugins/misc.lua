@@ -4,10 +4,6 @@ local M = {
 		ft = "zinc"
 	},
 	'lervag/vimtex',
-	{
-		'norcalli/nvim-colorizer.lua',
-		event = 'VeryLazy',
-	},
 	-- {
 	-- 	"andymass/vim-matchup",
 	-- 	config = function()
@@ -17,20 +13,9 @@ local M = {
 	-- },
 	{ -- lsp progress
 		"j-hui/fidget.nvim",
-		tag = "legacy",
+		version = "*", -- latest release tag
 		event = "LspAttach",
 		opts = {},
-	},
-	{
-		'junegunn/vim-easy-align',
-		config = function()
-			vim.cmd [[
-        " Start interactive EasyAlign in visual mode (e.g. vipga)
-        xmap ga <Plug>(EasyAlign)
-        " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-        nmap ga <Plug>(EasyAlign)
-      ]]
-		end
 	},
 	{ -- predefined stubs for pyright
 		"microsoft/python-type-stubs",

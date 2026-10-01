@@ -21,10 +21,8 @@ local M = {
 		},
 	},
 	config = function(_, opts)
-		-- 初始化 mason.nvim 和 conform.nvim
 		require("conform").setup(opts)
 
-		-- 辅助函数：从指定文件类型的配置中提取所有工具名称（去重）
 		local function get_ensure_installed_for_ft(ft, ft_table)
 			local tools = {}
 			-- Filetype-specific tools
@@ -62,7 +60,6 @@ local M = {
 			ruff_fix = "ruff",
 		}
 
-		-- 设置 <leader>f 键映射，在按下时自动检测并安装缺失的工具后格式化代码
 		vim.keymap.set({ "n", "v" }, "<leader>lf", function()
 			local ft = vim.bo.filetype
 			local tools = get_ensure_installed_for_ft(ft, opts.formatters_by_ft)

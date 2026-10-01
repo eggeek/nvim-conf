@@ -55,7 +55,7 @@ function M.config()
       lualine_c = {
         {
           components.winbar_fname,
-          color = "@text.strong"
+          color = "@markup.strong"
         }
       },
     },

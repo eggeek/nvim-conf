@@ -52,7 +52,6 @@ map("n", "<leader>tc", "<cmd>tabnew<cr>", s)
 map("n", "<leader>tp", "<cmd>tabprev<cr>", s)
 map("n", "<leader>tn", "<cmd>tabnext<cr>", s)
 
-map("n", "<leader>z", "<cmd>ColorizerToggle<cr>", s)
 map("n", "<leader>ca", vim.lsp.buf.code_action, s)
 
 -- Toggle comment with built-in gc/gcc (<C-/> arrives as <C-_> in terminals)

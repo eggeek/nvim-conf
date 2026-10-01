@@ -28,6 +28,8 @@ end
 
 M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
+	-- Built-in LSP colour highlights off: hex colours are shown on demand with <leader>z (mini.lua)
+	vim.lsp.document_color.enable(false, { bufnr = bufnr })
 	-- No automatic window or hint: the signature shows in the statusline (lualine.lua).
 	-- Insert mode: <M-x> toggles the signature window, <M-n> cycles overloads.
 	require("lsp_signature").on_attach({
