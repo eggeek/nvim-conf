@@ -1,23 +1,21 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
-  event = "User FileOpened",
+  branch = "main",
+  lazy = false, -- main branch does not support lazy-loading
   build = ":TSUpdate",
   dependencies = {
     {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      event = "VeryLazy",
-    },
-    {
       "JoosepAlviste/nvim-ts-context-commentstring",
       event = "VeryLazy",
+      init = function()
+        vim.g.skip_ts_context_commentstring_module = true
+      end,
+      opts = {},
     },
-    -- {
-    --   "HiPhish/nvim-ts-rainbow2",
-    --   event = "VeryLazy",
-    -- },
     {
       "windwp/nvim-ts-autotag",
       event = "VeryLazy",
+      opts = {},
     },
     {
       "windwp/nvim-autopairs",
@@ -26,74 +24,40 @@ local M = {
   },
 }
 
+-- filetypes left to regex/vimtex highlighting
+local no_highlight = { latex = true, tex = true, csv = true }
+-- filetypes that keep regex highlighting on top of treesitter
+local regex_too = { markdown = true }
+
 function M.config()
-  require("nvim-treesitter.configs").setup {
-    ensure_installed = {
-      "lua",
-      "markdown",
-      "markdown_inline",
-      "latex",
-      "bash",
-      "python",
-      "cpp",
-      "rust",
-      "vimdoc",
-      "query",
-			"typst",
-			"csv"
-    }, -- put the language you want in this array
-    ignore_install = { "" },
-    sync_install = false,
-    highlight = {
-      enable = true,
-      disable = { "latex", "tex", "csv" },
-      additional_vim_regex_highlighting = { "markdown" },
-    },
-
-    indent = { enable = false },
-
-    matchup = { -- enable this significantly slow down ui
-      enable = false
-      -- enable = { "astro" },
-      -- disable = { "lua" },
-    },
-
-    autotag = { enable = true },
-    autopairs = { enable = true },
-
-    -- textobjects = {
-    --   select = {
-    --     enable = false,
-    --     -- Automatically jump forward to textobj, similar to targets.vim
-    --     lookahead = true,
-    --     keymaps = {
-    --       -- You can use the capture groups defined in textobjects.scm
-    --       ["af"] = "@function.outer",
-    --       ["if"] = "@function.inner",
-    --       ["at"] = "@class.outer",
-    --       ["it"] = "@class.inner",
-    --       ["ac"] = "@call.outer",
-    --       ["ic"] = "@call.inner",
-    --       ["aa"] = "@parameter.outer",
-    --       ["ia"] = "@parameter.inner",
-    --       ["al"] = "@loop.outer",
-    --       ["il"] = "@loop.inner",
-    --       ["ai"] = "@conditional.outer",
-    --       ["ii"] = "@conditional.inner",
-    --       ["a/"] = "@comment.outer",
-    --       ["i/"] = "@comment.inner",
-    --       ["ab"] = "@block.outer",
-    --       ["ib"] = "@block.inner",
-    --       ["as"] = "@statement.outer",
-    --       ["is"] = "@scopename.inner",
-    --       ["aA"] = "@attribute.outer",
-    --       ["iA"] = "@attribute.inner",
-    --       ["aF"] = "@frame.outer",
-    --       ["iF"] = "@frame.inner",
-    --     },
-    --   },
-    -- },
+  require("nvim-treesitter").install {
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "latex",
+    "bash",
+    "python",
+    "cpp",
+    "rust",
+    "vimdoc",
+    "query",
+    "typst",
+    "csv",
   }
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("UserTreesitter", {}),
+    callback = function(args)
+      local ft = vim.bo[args.buf].filetype
+      if no_highlight[ft] then
+        return
+      end
+      -- pcall: skip filetypes without a parser
+      if pcall(vim.treesitter.start, args.buf) and regex_too[ft] then
+        vim.bo[args.buf].syntax = "on"
+      end
+    end,
+  })
 end
 
 return M
