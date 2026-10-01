@@ -14,7 +14,7 @@ if vim.g.neovide then
 end
 
 require 'user.options'
-require 'user.keymaps'.load_defaults()
+require 'user.keymaps'
 -- ui
 Spec 'user.onedark'
 Spec 'user.devicons'

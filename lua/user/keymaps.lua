@@ -1,229 +1,78 @@
-local M = {}
+-- General keymaps. Plugin keymaps live in the plugin's spec (`keys`).
+local map = vim.keymap.set
+local s = { silent = true }
 
-local generic_opts_any = { noremap = true, silent = true }
+-- Insert: save, emacs-style movement
+map("i", "<C-s>", "<cmd>w<cr><esc>", s)
+map("i", "<C-p>", "<Up>", s)
+map("i", "<C-n>", "<Down>", s)
+map("i", "<C-f>", "<Right>", s)
+map("i", "<C-b>", "<Left>", s)
+map("i", "<C-k>", "<cmd>normal!d$<cr><END>", s) -- normal! rather than <C-o> to avoid triggering events
+map("i", "<C-a>", "<cmd>normal!^<cr>", s)
+map("i", "<C-e>", "<END>", s)
 
-local generic_opts = {
-	insert_mode = generic_opts_any,
-	normal_mode = generic_opts_any,
-	visual_mode = generic_opts_any,
-	visual_block_mode = generic_opts_any,
-	command_mode = generic_opts_any,
-	operator_pending_mode = generic_opts_any,
-	term_mode = { silent = true },
-}
+-- Fzf
+map("n", "z=", "<cmd>call FzfSpell()<cr>", s)
+map("n", "<leader>gf", "<cmd>GFiles<cr>", s)
 
-local mode_adapters = {
-	insert_mode = "i",
-	normal_mode = "n",
-	term_mode = "t",
-	visual_mode = "v",
-	visual_block_mode = "x",
-	command_mode = "c",
-	operator_pending_mode = "o",
-}
+-- Resize with arrows
+map("n", "<C-Up>", "<cmd>resize -2<cr>", s)
+map("n", "<C-Down>", "<cmd>resize +2<cr>", s)
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", s)
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", s)
 
-local mode_adapters_rev = {
-	n = "normal_mode",
-	x = "visual_block_mode",
-}
+-- Diagnostics
+map("n", "<leader>q", vim.diagnostic.setloclist, s)
+map("n", "<leader>df", vim.diagnostic.open_float, s)
+map("n", "<leader>dl", function()
+	vim.diagnostic.config { virtual_text = not vim.diagnostic.config().virtual_text }
+end, s)
 
----@class Keys
----@field insert_mode table
----@field normal_mode table
----@field terminal_mode table
----@field visual_mode table
----@field visual_block_mode table
----@field command_mode table
----@field operator_pending_mode table
+-- Clear search highlight
+map("n", "<M-l>", "<cmd>nohlsearch<Bar>diffupdate<Bar>echo <cr>", s)
 
-local defaults = {
-	insert_mode = {
-		["<C-s>"] = "<cmd>w<cr><esc>",
-		-- emacs style
-		["<C-p>"] = "<Up>",
-		["<C-n>"] = "<Down>",
-		["<C-f>"] = "<Right>",
-		["<C-b>"] = "<Left>",
-		-- use normal! rather than <C-O> to avoid trigger events
-		["<C-k>"] = "<cmd>normal!d$<cr><END>",
-		["<C-a>"] = "<cmd>normal!^<cr>",
-		["<C-e>"] = "<END>",
-	},
+-- Horizontal scroll
+map("n", "<M-e>", "zh", s)
+map("n", "<M-y>", "zl", s)
 
-	normal_mode = {
+-- Keep cursor centered / in place; move by screen line
+map("n", "n", "nzzzv", s)
+map("n", "N", "Nzzzv", s)
+map("n", "j", "gj", s)
+map("n", "k", "gk", s)
+map("n", "J", "mzJ`z", s)
 
-		-- Fzf
-		["z="] = "<cmd>call FzfSpell()<cr>",
-		["<leader>gf"] = "<cmd>GFiles<cr>",
+-- Save, tabs
+map("n", "<C-s>", "<cmd>w<cr>", s)
+for i = 1, 7 do
+	map("n", "<leader>" .. i, i .. "gt", s)
+end
+map("n", "<leader>tc", "<cmd>tabnew<cr>", s)
+map("n", "<leader>tp", "<cmd>tabprev<cr>", s)
+map("n", "<leader>tn", "<cmd>tabnext<cr>", s)
 
-		-- Resize with arrows
-		["<C-Up>"] = "<cmd>resize -2<CR>",
-		["<C-Down>"] = "<cmd>resize +2<CR>",
-		["<C-Left>"] = "<cmd>vertical resize -2<CR>",
-		["<C-Right>"] = "<cmd>vertical resize +2<CR>",
+map("n", "<leader>z", "<cmd>ColorizerToggle<cr>", s)
+map("n", "<leader>ca", vim.lsp.buf.code_action, s)
 
-
-		-- Diagnostic
-		["<leader>q"] = "<cmd>lua vim.diagnostic.setloclist()<cr>",
-		["<leader>df"] = "<cmd>lua vim.diagnostic.open_float()<cr>",
-		["<leader>dl"] = function()
-			local current_value = vim.diagnostic.config().virtual_text
-			if current_value then
-				vim.diagnostic.config({ virtual_text = false })
-			else
-				vim.diagnostic.config({ virtual_text = true })
-			end
-		end,
-
-		-- nohl
-		["<M-l>"] = "<cmd>nohlsearch<Bar>diffupdate<Bar>echo <CR>",
-
-		-- Horizontal scroll
-		["<M-e>"] = "zh",
-		["<M-y>"] = "zl",
-
-		-- Keey centered
-		["n"] = "nzzzv",
-		["N"] = "Nzzzv",
-		["j"] = "gj",
-		["k"] = "gk",
-		["J"] = "mzJ`z",
-
-		-- Telescope keys live in telescope.lua
-
-		["<C-s>"] = "<cmd>w<cr>",
-		["<leader>1"] = "1gt",
-		["<leader>2"] = "2gt",
-		["<leader>3"] = "3gt",
-		["<leader>4"] = "4gt",
-		["<leader>5"] = "5gt",
-		["<leader>6"] = "6gt",
-		["<leader>7"] = "7gt",
-		["<leader>tc"] = "<cmd>tabnew<cr>",
-		["<leader>tp"] = "<cmd>tabprev<cr>",
-		["<leader>tn"] = "<cmd>tabnext<cr>",
-		["<leader>z"] = "<cmd>ColorizerToggle<cr>",
-
-		-- Toggle comment with built-in gcc (<C-/> arrives as <C-_> in terminals)
-		["<C-/>"] = { "gcc", { remap = true } },
-		["<C-_>"] = { "gcc", { remap = true } },
-
-		-- Lsp
-		-- ["<leader>lf"] = "<cmd>lua vim.lsp.buf.format()<cr>",
-		["<leader>ca"] = "<cmd>lua vim.lsp.buf.code_action()<cr>",
-	},
-
-	term_mode = {
-		-- Terminal window navigation
-		["<C-h>"] = "<C-\\><C-N><C-w>h",
-		["<C-j>"] = "<C-\\><C-N><C-w>j",
-		["<C-k>"] = "<C-\\><C-N><C-w>k",
-		["<C-l>"] = "<C-\\><C-N><C-w>l",
-	},
-
-	visual_mode = {
-		-- Better indenting
-		["<"] = "<gv",
-		[">"] = ">gv",
-
-		-- Move current line / block with Alt-j/k ala vscode.
-		["J"] = ":m '>+1<cr>gv=gv",
-		["K"] = ":m '<-2<cr>gv=gv",
-	},
-
-	visual_block_mode = {
-		-- Move current line / block with Alt-j/k ala vscode.
-		["J"] = ":m '>+1<CR>gv-gv",
-		["K"] = ":m '<-2<CR>gv-gv",
-
-		-- Toggle comment with built-in gc (<C-/> arrives as <C-_> in terminals)
-		["<C-/>"] = { "gc", { remap = true } },
-		["<C-_>"] = { "gc", { remap = true } },
-	},
-
-	command_mode = {
-		-- navigate tab completion with <c-j> and <c-k>
-		-- runs conditionally
-		["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
-		["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
-
-		-- emacs style
-		-- ["<C-f>"] = "<Right>",
-		-- ["<C-b>"] = "<Left>",
-		-- ["<C-a>"] = "<Home>",
-		-- ["<C-e>"] = "<End>",
-	},
-}
-
--- Unsets all keybindings defined in keymaps
--- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
-function M.clear(keymaps)
-	local default = M.get_defaults()
-	for mode, mappings in pairs(keymaps) do
-		local translated_mode = mode_adapters[mode] and mode_adapters[mode] or mode
-		for key, _ in pairs(mappings) do
-			-- some plugins may override default bindings that the user hasn't manually overriden
-			if
-				default[mode][key] ~= nil or (default[translated_mode] ~= nil and default[translated_mode][key] ~= nil)
-			then
-				pcall(vim.api.nvim_del_keymap, translated_mode, key)
-			end
-		end
-	end
+-- Toggle comment with built-in gc/gcc (<C-/> arrives as <C-_> in terminals)
+for _, lhs in ipairs { "<C-/>", "<C-_>" } do
+	map("n", lhs, "gcc", { remap = true })
+	map("x", lhs, "gc", { remap = true })
 end
 
--- Set key mappings individually
--- @param mode The keymap mode, can be one of the keys of mode_adapters
--- @param key The key of keymap
--- @param val Can be form as a mapping or tuple of mapping and user defined opt
-function M.set_keymaps(mode, key, val)
-	local opt = generic_opts[mode] or generic_opts_any
-	if type(val) == "table" then
-		opt = val[2]
-		val = val[1]
-	end
-	if val then
-		vim.keymap.set(mode, key, val, opt)
-	else
-		pcall(vim.api.nvim_del_keymap, mode, key)
-	end
-end
+-- Terminal: window navigation
+map("t", "<C-h>", "<C-\\><C-N><C-w>h", s)
+map("t", "<C-j>", "<C-\\><C-N><C-w>j", s)
+map("t", "<C-k>", "<C-\\><C-N><C-w>k", s)
+map("t", "<C-l>", "<C-\\><C-N><C-w>l", s)
 
--- Load key mappings for a given mode
--- @param mode The keymap mode, can be one of the keys of mode_adapters
--- @param keymaps The list of key mappings
-function M.load_mode(mode, keymaps)
-	mode = mode_adapters[mode] or mode
-	for k, v in pairs(keymaps) do
-		M.set_keymaps(mode, k, v)
-	end
-end
+-- Visual: keep selection after indenting; move selected lines down/up
+map("v", "<", "<gv", s)
+map("v", ">", ">gv", s)
+map("v", "J", ":m '>+1<cr>gv=gv", s)
+map("v", "K", ":m '<-2<cr>gv=gv", s)
 
--- Load key mappings for all provided modes
--- @param keymaps A list of key mappings for each mode
-function M.load(keymaps)
-	keymaps = keymaps or {}
-	for mode, mapping in pairs(keymaps) do
-		M.load_mode(mode, mapping)
-	end
-end
-
--- Load the default keymappings
-function M.load_defaults()
-	M.load(M.get_defaults())
-end
-
--- Get the default keymappings
-function M.get_defaults()
-	return defaults
-end
-
-function M.get_defaults_mode(mode)
-	if defaults[mode] ~= nil then
-		return defaults[mode]
-	else
-		return defaults[mode_adapters_rev[mode]]
-	end
-end
-
-return M
+-- Command line: <C-j>/<C-k> move in the completion menu when it's open
+map("c", "<C-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true })
+map("c", "<C-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true })
