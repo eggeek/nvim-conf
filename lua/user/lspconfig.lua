@@ -96,6 +96,12 @@ function M.config()
 				[S.INFO]  = "DiagnosticSignInfo",
 			},
 		},
+		-- built-in [d ]d [D ]D open the float after jumping
+		jump = {
+			on_jump = function(_, bufnr)
+				vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+			end,
+		},
 		virtual_text = false,
 		update_in_insert = false,
 		underline = true,

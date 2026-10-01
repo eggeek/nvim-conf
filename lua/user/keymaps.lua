@@ -72,8 +72,6 @@ local defaults = {
 		{ silent = true },
 
 		-- Diagnostic
-		["[d"] = "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-		["]d"] = "<cmd>lua vim.diagnostic.goto_next()<cr>",
 		["<leader>q"] = "<cmd>lua vim.diagnostic.setloclist()<cr>",
 		["<leader>df"] = "<cmd>lua vim.diagnostic.open_float()<cr>",
 		["<leader>dl"] = function()
