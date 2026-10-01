@@ -6,7 +6,7 @@ local defs = {
       pattern = "*",
       desc = "Highlight text on yank",
       callback = function()
-        vim.highlight.on_yank { higroup = "Search", timeout = 100 }
+        vim.hl.on_yank { higroup = "Search", timeout = 100 }
       end,
     },
   },

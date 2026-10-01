@@ -61,7 +61,7 @@ M.config = function()
 		active = true,
 		on_config_done = nil,
 		enabled = function()
-			local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+			local buftype = vim.bo[0].buftype
 			if require("cmp_dap").is_dap_buffer() then
 				return true
 			end

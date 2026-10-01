@@ -45,7 +45,7 @@ function M.merge_tbls(a, b)
 end
 
 function M.join_paths(...)
-  local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
+  local path_sep = vim.uv.os_uname().version:match "Windows" and "\\" or "/"
   local result = table.concat({ ... }, path_sep)
   return result
 end
