@@ -17,7 +17,8 @@ local M = {
 			javascriptreact = { "dprint", lsp_format = "fallback" },
 			typescriptreact = { "dprint", lsp_format = "fallback" },
 			toml = { "taplo", lsp_format = "fallback" },
-			["*"] = { "trim_whitespace", "trim_newlines" },
+			-- "_" = only filetypes not listed above ("*" would always run and block lsp_format = "fallback")
+			["_"] = { "trim_whitespace", "trim_newlines" },
 		},
 	},
 	config = function(_, opts)
@@ -36,15 +37,6 @@ local M = {
 			elseif type(cfg) == "string" then
 				tools[cfg] = true
 			end
-			-- Global tools from ["*"]
-			local global_cfg = ft_table["*"]
-			if type(global_cfg) == "table" then
-				for _, item in ipairs(global_cfg) do
-					if type(item) == "string" then
-						tools[item] = true
-					end
-				end
-			end
 			local list = {}
 			for tool, _ in pairs(tools) do
 				table.insert(list, tool)
@@ -58,6 +50,7 @@ local M = {
 			ruff_format = "ruff",
 			ruff_organize_imports = "ruff",
 			ruff_fix = "ruff",
+			clang_format = "clang-format",
 		}
 
 		vim.keymap.set({ "n", "v" }, "<leader>lf", function()
@@ -72,7 +65,7 @@ local M = {
 					pkg:install()
 				end
 			end
-			require("conform").format({ async = true, lsp_fallback = true })
+			require("conform").format({ async = true, lsp_format = "fallback" })
 		end, { desc = "Code formatter (detect missing deps)" })
 	end,
 }

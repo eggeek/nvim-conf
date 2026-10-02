@@ -12,10 +12,6 @@ map("i", "<C-k>", "<cmd>normal!d$<cr><END>", s) -- normal! rather than <C-o> to 
 map("i", "<C-a>", "<cmd>normal!^<cr>", s)
 map("i", "<C-e>", "<END>", s)
 
--- Fzf
-map("n", "z=", "<cmd>call FzfSpell()<cr>", s)
-map("n", "<leader>gf", "<cmd>GFiles<cr>", s)
-
 -- Resize with arrows
 map("n", "<C-Up>", "<cmd>resize -2<cr>", s)
 map("n", "<C-Down>", "<cmd>resize +2<cr>", s)
@@ -72,8 +68,16 @@ map("v", ">", ">gv", s)
 map("v", "J", ":m '>+1<cr>gv=gv", s)
 map("v", "K", ":m '<-2<cr>gv=gv", s)
 
--- Command line: <C-j>/<C-k> move in the completion menu when it's open;
--- otherwise <C-k> deletes to end of line (emacs style; other emacs keys are in plugin/emacs-move.vim)
+-- Command line: emacs-style editing
+local at_end = function() return vim.fn.getcmdpos() > #vim.fn.getcmdline() end
+vim.o.cedit = "" -- free <C-f> (default: open the command-line window)
+map("c", "<C-a>", "<Home>")
+map("c", "<C-x><C-a>", "<C-a>") -- the original <C-a>: insert all completions
+map("c", "<C-b>", "<Left>")
+map("c", "<C-d>", function() return at_end() and "<C-d>" or "<Del>" end, { expr = true }) -- at end: list completions
+map("c", "<C-f>", function() return at_end() and "" or "<Right>" end, { expr = true })
+map("c", "<M-d>", "<S-Right><C-w>") -- delete word forward
+-- <C-j>/<C-k> move in the completion menu when it's open; otherwise <C-k> deletes to end of line
 map("c", "<C-j>", function()
 	return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-j>"
 end, { expr = true })

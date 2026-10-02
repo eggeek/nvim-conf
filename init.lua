@@ -62,6 +62,6 @@ require("lazy").setup {
 }
 
 -- Also loaded automatically:
---   plugin/*.vim           Vimscript settings (tabline, fzf, emacs-style cmdline keys, vimtex)
+--   plugin/tabline.lua     tab line
 --   after/plugin/*.lua     autocmds
 --   after/lsp/*.lua        per-server LSP settings
