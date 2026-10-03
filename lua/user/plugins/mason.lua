@@ -22,24 +22,14 @@ local M = {
 
 M.servers = {
 	"lua_ls",
-	-- "cssls",
-	-- "html",
 	"pyright",
 	-- "ty",
 	-- "ruff",
-	-- "pylyzer",
 	"bashls",
-	-- "jsonls",
-	-- "yamlls",
 	"texlab",
 	"clangd",
-	-- "jdtls",
 	"rust_analyzer", -- using rustaceanvim
-	-- "tailwindcss",
 	"tinymist",
-	"cmake",
-	"julials",
-	"ts_ls",
 	"taplo"
 }
 

@@ -54,6 +54,7 @@ function M.config()
     "query",
     "typst",
     "csv",
+		"html"
   }
 
   vim.api.nvim_create_autocmd("FileType", {
