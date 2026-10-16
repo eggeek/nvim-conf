@@ -30,15 +30,9 @@ M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
 	-- Built-in LSP colour highlights off: hex colours are shown on demand with <leader>z (mini.lua)
 	vim.lsp.document_color.enable(false, { bufnr = bufnr })
-	-- No automatic window or hint: the signature shows in the statusline (lualine.lua).
+	-- No automatic window or hint: the signature shows in the statusline (user/statusline.lua).
 	-- Insert mode: <M-x> toggles the signature window, <M-n> cycles overloads.
-	require("lsp_signature").on_attach({
-		floating_window = false,
-		hint_enable = false,
-		doc_line = 0,
-		toggle_key = "<M-x>",
-		select_signature_key = "<M-n>",
-	}, bufnr)
+	require("user.statusline").attach_signature(bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)
 	end

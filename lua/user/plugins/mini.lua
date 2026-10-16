@@ -3,6 +3,7 @@ local M = {
 }
 
 function M.config()
+	require("user.statusline").setup()
 	require("mini.ai").setup()
 	require("mini.surround").setup()
 	require("mini.pairs").setup()

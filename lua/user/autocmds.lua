@@ -64,25 +64,6 @@ local defs = {
       end,
     },
   },
-  {
-    {
-			"BufAdd",
-			"BufNew",
-			"BufDelete",
-      "BufWritePost",
-			"BufHidden",
-      "TabClosed",
-      "TabEnter",
-    },
-    {
-      group = '_refresh_winbar',
-      callback = function()
-        require 'lualine'.refresh({
-          place = { 'winbar' }
-        })
-      end
-    }
-  },
   { -- restore the cursor location from last time
     "BufReadPost",
     {

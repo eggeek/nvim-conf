@@ -16,7 +16,6 @@ require("lazy").setup {
 		{ import = "user.plugins.onedark" },
 		{ import = "user.plugins.devicons" },
 		{ import = "user.plugins.treesitter" },
-		{ import = "user.plugins.lualine" },
 		{ import = "user.plugins.gitsigns" },
 		{ import = "user.plugins.indentline" },
 

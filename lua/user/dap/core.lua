@@ -29,6 +29,7 @@ local function enter()
     vim.keymap.set(k[1], k[2], k[3], { desc = "Debug" })
   end
   notify("Debug mode on", "info")
+  vim.cmd.redrawstatus()
 end
 
 local function leave()
@@ -43,6 +44,7 @@ local function leave()
     end
   end
   saved = nil
+  vim.cmd.redrawstatus()
   notify("Debug mode off", "info")
 end
 
