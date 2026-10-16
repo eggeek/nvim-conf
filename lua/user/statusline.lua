@@ -71,7 +71,7 @@ local function servers()
     end
   end
   return "[" .. table.concat(names, ", ") .. "]"
-    .. (copilot and ("%#SLCopilot# " .. icons.git.Octoface .. "%#UserStatuslineBold#") or "")
+    .. (copilot and ("%#SLCopilot# " .. icons.git.Octoface) or "")
 end
 
 local function filetype()
@@ -89,8 +89,7 @@ local function content()
   local _, mode_hl = mini.section_mode({})
   local dap = package.loaded["user.dap.core"]
   local branch = vim.b.gitsigns_head
-  local git = branch and branch ~= "" and ("%#SLGitIcon#" .. icons.git.Branch
-    .. "%#SLBranchName# " .. escape(branch) .. "%#StatusLine#") or ""
+  local git = branch and branch ~= "" and (icons.git.Branch .. "%#SLBranchName# " .. escape(branch)) or ""
   local wide = vim.o.columns > 100
   local env = wide and vim.bo.filetype == "python" and (vim.env.VIRTUAL_ENV_PROMPT or vim.env.CONDA_DEFAULT_ENV)
   local python = env and ("[" .. escape(env:match("([^/]+)/?$") or env) .. "]") or ""
@@ -99,7 +98,7 @@ local function content()
   return mini.combine_groups({
     "%#" .. mode_hl .. "#^•⩊•^",
     { hl = mode_hl, strings = { dap and dap.active() and "DEBUG" or "" } },
-    { hl = "UserStatuslineBold", strings = { git } },
+    { hl = "SLGitIcon", strings = { git } },
     "%<",
     { hl = "StatusLine", strings = { context() } },
     "%=",
