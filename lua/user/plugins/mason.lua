@@ -30,7 +30,8 @@ M.servers = {
 	"clangd",
 	"rust_analyzer", -- using rustaceanvim
 	"tinymist",
-	"taplo"
+	"taplo",
+	"nil_ls"
 }
 
 function M.config()

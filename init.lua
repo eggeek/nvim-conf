@@ -22,7 +22,6 @@ require("lazy").setup {
 		-- lsp
 		{ import = "user.plugins.mason" },
 		{ import = "user.plugins.lspconfig" },
-		{ import = "user.plugins.linter", enabled = false },
 		{ import = "user.plugins.navic" },
 		{ import = "user.plugins.illuminate" },
 		{ import = "user.plugins.debugger" },
@@ -41,14 +40,11 @@ require("lazy").setup {
 
 		-- ai
 		{ import = "user.plugins.copilot" },
-		{ import = "user.plugins.opencode", enabled = false },
-		{ import = "user.plugins.avante", enabled = false },
 
 		-- enhancement
 		{ import = "user.plugins.nvim-tmux" },
 		{ import = "user.plugins.notify" },
 		{ import = "user.plugins.mini" },
-		{ import = "user.plugins.surround", enabled = false },
 
 		-- note taking
 		{ import = "user.plugins.notetaking" },

@@ -1,8 +1,12 @@
 -- Must be set before plugins load, so their mappings use the right leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
 vim.g.markdown_recommended_style = 0
+-- Over SSH, copy through the terminal to the local computer's clipboard.
+-- https://neovim.io/doc/user/provider.html#clipboard-osc52
+if vim.env.SSH_CONNECTION then
+  vim.g.clipboard = "osc52"
+end
 
 -- Editing
 vim.o.formatoptions = "cqj"
