@@ -36,6 +36,7 @@ M.servers = {
 
 function M.config()
 	require("mason").setup {
+		PATH = "append",
 		ui = {
 			border = "rounded",
 		},
