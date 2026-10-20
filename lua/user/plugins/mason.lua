@@ -6,6 +6,7 @@ local M = {
 			event = "User FileOpened",
 		},
 		"nvim-lua/plenary.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		{
 			'mrcjkb/rustaceanvim',
 			version = '^6', -- Recommended
@@ -44,6 +45,12 @@ function M.config()
 	require("mason-lspconfig").setup {
 		ensure_installed = M.servers,
     automatic_enable = false
+	}
+	require("mason-tool-installer").setup {
+		ensure_installed = {
+			"debugpy",
+			"codelldb",
+		},
 	}
 end
 
