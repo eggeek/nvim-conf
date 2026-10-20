@@ -4,6 +4,12 @@ local M = {
 		{
 			"williamboman/mason.nvim",
 			event = "User FileOpened",
+			opts = {
+				PATH = "append",
+				ui = {
+					border = "rounded",
+				},
+			},
 		},
 		"nvim-lua/plenary.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -36,20 +42,26 @@ M.servers = {
 }
 
 function M.config()
-	require("mason").setup {
-		PATH = "append",
-		ui = {
-			border = "rounded",
-		},
-	}
 	require("mason-lspconfig").setup {
 		ensure_installed = M.servers,
     automatic_enable = false
 	}
 	require("mason-tool-installer").setup {
 		ensure_installed = {
+			-- DAP
 			"debugpy",
 			"codelldb",
+			-- Linter
+			"deno",
+			"ruff",
+			"ty",
+			"typos",
+			-- Formatter
+			"black",
+			"latexindent",
+			"stylua",
+			"tex-fmt",
+			"typstyle"
 		},
 	}
 end

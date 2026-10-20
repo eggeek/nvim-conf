@@ -1,16 +1,16 @@
 if vim.g.neovide then
-	require "user.neovide-opt"
+	require("user.neovide-opt")
 end
 
-require "user.options"
-require "user.keymaps"
-require "user.lazy" -- bootstrap lazy.nvim
+require("user.options")
+require("user.keymaps")
+require("user.lazy") -- bootstrap lazy.nvim
 
 -- Plugin list: each entry loads lua/user/plugins/<name>.lua (gf on the name opens it).
 -- Turn one off with `enabled = false`.
 -- (Order here doesn't affect load order; use `priority`/`dependencies` in a spec for that.)
 
-require("lazy").setup {
+require("lazy").setup({
 	spec = {
 		-- ui
 		{ import = "user.plugins.onedark" },
@@ -54,7 +54,7 @@ require("lazy").setup {
 	},
 	ui = { border = "rounded" },
 	change_detection = { notify = false },
-}
+})
 
 -- Also loaded automatically:
 --   plugin/tabline.lua     tab line
