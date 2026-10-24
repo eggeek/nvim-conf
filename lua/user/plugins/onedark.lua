@@ -1,3 +1,5 @@
+local completion_bg = "#000000"
+
 return {
   "navarasu/onedark.nvim",
   lazy = false, -- main colorscheme: load during startup, before other plugins
@@ -15,7 +17,7 @@ return {
       -- Only the given attributes change; the rest come from the theme.
       highlights = {
         Visual = { bg = "#264F78" },
-        NormalFloat = { bg = "none" },
+        NormalFloat = { bg = completion_bg },
         FloatBorder = { fg = "#e06c75", bg = "none" },
         TabLine = { fg = "#535965", bg = "#2D333C" },
         TabLineSel = { fg = "#75BEFF", bg = "#22262e", fmt = "bold" },
@@ -39,11 +41,10 @@ return {
         BlinkCmpLabelMatch = { fg = "#E8AB53" },
         BlinkCmpGhostText = { fg = "#2D333C" },
         BlinkCmpSource = { fg = "$light_grey" }, -- as CmpItemMenu
-        -- window style of nvim-cmp's bordered(): Normal background, FloatBorder, Visual selection
-        BlinkCmpMenu = { fg = "$fg" },
+        BlinkCmpMenu = { fg = "$fg", bg = completion_bg },
         BlinkCmpMenuBorder = { fg = "#e06c75" },
         BlinkCmpMenuSelection = { bg = "#264F78" },
-        BlinkCmpDoc = { fg = "$fg" },
+        BlinkCmpDoc = { fg = "$fg", bg = completion_bg },
         BlinkCmpDocBorder = { fg = "#e06c75" },
       },
     }

@@ -17,10 +17,12 @@ local M = {
 	},
 }
 
--- Built-in LSP keys already cover K (hover), grr/gri/grn/gra/grt and gO.
--- These add the ones Neovim has no default for.
+-- Built-in LSP keys already cover grr/gri/grn/gra/grt and gO.
 local function lsp_keymaps(bufnr)
 	local opts = { buffer = bufnr }
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover { border = "none" }
+	end, opts)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
@@ -114,8 +116,9 @@ function M.config()
 
 	vim.diagnostic.config(default_diagnostic_config)
 
+	local group = vim.api.nvim_create_augroup("UserLspConfig", {})
 	vim.api.nvim_create_autocmd("LspAttach", {
-		group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+		group = group,
 		callback = function(ev)
 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
 			M.on_attach(client, ev.buf)

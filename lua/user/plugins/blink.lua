@@ -72,6 +72,7 @@ return {
       list = { selection = { preselect = false, auto_insert = false } },
       -- label | icon kind | (source)
       menu = {
+        border = "none",
         draw = {
           columns = { { "label" }, { "kind_icon", "kind", gap = 1 }, { "source_name" } },
           components = {
@@ -83,7 +84,7 @@ return {
           },
         },
       },
-      documentation = { auto_show = true },
+      documentation = { auto_show = true, window = { border = "none" } },
     },
 
     appearance = { kind_icons = require("user.icons").kind },
